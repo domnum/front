@@ -32,10 +32,10 @@ jobs:
 
       - name: Gerar env.js com variáveis
         run: |
-          echo "window['env'] = {" > ./dist/front/env.js
-          echo "  BACKEND_URL: '${{ secrets.FRONTEND_BACKEND_URL }}'," >> ./dist/front/env.js
-          echo "  API_KEY: '${{ secrets.FRONTEND_API_KEY }}'" >> ./dist/front/env.js
-          echo "};" >> ./dist/front/env.js
+          echo "window['env'] = {" > ./dist/domnum/env.js
+          echo "  BACKEND_URL: '${{ secrets.FRONTEND_BACKEND_URL }}'," >> ./dist/domnum/env.js
+          echo "  API_KEY: '${{ secrets.FRONTEND_API_KEY }}'" >> ./dist/domnum/env.js
+          echo "};" >> ./dist/domnum/env.js
 
       - name: Login no GitHub Container Registry
         uses: docker/login-action@v2
