@@ -2,8 +2,8 @@ FROM nginx:alpine
 
 WORKDIR /usr/share/nginx/html
 
-COPY ./dist/domnum/ ./
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./deploy/ ./
+COPY ./deploy/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
