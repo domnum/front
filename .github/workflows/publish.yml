@@ -19,6 +19,24 @@ jobs:
       - name: Definir versão da imagem com base na execução
         run: echo "IMAGE_VERSION=1.0.${{ github.run_number }}" >> $GITHUB_ENV
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build Angular
+        run: npm run build -- --configuration production
+
+      - name: Gerar env.js com variáveis
+        run: |
+          echo "window['env'] = {" > ./dist/front/env.js
+          echo "  BACKEND_URL: '${{ secrets.FRONTEND_BACKEND_URL }}'," >> ./dist/front/env.js
+          echo "  API_KEY: '${{ secrets.FRONTEND_API_KEY }}'" >> ./dist/front/env.js
+          echo "};" >> ./dist/front/env.js
+
       - name: Login no GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -26,13 +44,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build da imagem Docker (Angular)
+      - name: Build da imagem Docker (NGINX + dist)
         run: |
           docker build -t ghcr.io/domnum/front:${{ env.IMAGE_VERSION }} \
                        -t ghcr.io/domnum/front:main \
-            --build-arg BACKEND_URL=${{ secrets.BACKEND_URL }} \
-            --build-arg API_KEY=${{ secrets.API_KEY }} \
-            -f Dockerfile .
+                       -f Dockerfile .
 
       - name: Push da imagem versionada
         run: docker push ghcr.io/domnum/front:${{ env.IMAGE_VERSION }}
