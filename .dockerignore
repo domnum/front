@@ -4,5 +4,4 @@ dist
 src/**/*.spec.ts
 *.md
 Dockerfile
-nginx.conf
 *.log
