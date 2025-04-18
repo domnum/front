@@ -1,0 +1,73 @@
+.back-ground {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to bottom,
+    var(--p-surface-0),
+    var(--p-surface-50),
+    var(--p-surface-50),
+    var(--p-surface-50)
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background 0.6s ease-in-out;
+}
+
+.header {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  background: transparent;
+
+  .theme-toggle {
+    color: var(--p-primary-500);
+  }
+
+  .login-button {
+    color: white;
+    background-color: var(--p-primary-500);
+    border-radius: 20px;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--p-primary-600);
+    }
+  }
+
+  app-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--p-primary-500);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .header {
+    .login-button {
+      padding: 0.3rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    app-logo {
+      font-size: 1.5rem;
+    }
+
+    .row {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+.content-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-top: 3rem;
+}
