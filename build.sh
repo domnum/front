@@ -1,21 +1,32 @@
 #!/bin/bash
 
-# Limpa pastas anteriores
+set -e
+
+# Limpa build anterior
 rm -rf dist/
-rm -rf node_modules/
 rm -rf deploy/
 
 # Instala dependências
 npm ci
 
-# Build Angular para produção
+# Build Angular
 npm run build -- --configuration production
 
-# Verifica se a build foi gerada
-if [ ! -f dist/domnum/index.html ]; then
-  echo "❌ Build do Angular falhou. Arquivo index.html não encontrado."
+# Novo path real de saída
+BUILD_PATH="dist/domnum/browser"
+
+echo "📦 Conteúdo de $BUILD_PATH:"
+ls -la "$BUILD_PATH"
+
+if [ ! -f "$BUILD_PATH/index.html" ]; then
+  echo "❌ Build do Angular falhou. 'index.html' não encontrado."
   exit 1
 fi
 
-# Build imagem Docker
+# Prepara para docker
+mkdir deploy
+cp -r $BUILD_PATH/* deploy/
+cp nginx.conf deploy/
+
+# Build da imagem Docker
 docker build -t domnum-frontend-prod -f Dockerfile .
