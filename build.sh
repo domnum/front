@@ -33,8 +33,13 @@ mkdir deploy
 cp -r $BUILD_PATH/* deploy/
 cp nginx.conf deploy/
 
-# 🐳 Build da imagem Docker
 echo "🐳 Construindo imagem Docker..."
-docker build -t domnum-frontend-prod -f Dockerfile .
+docker build -t ghcr.io/domnum/front:${IMAGE_VERSION} \
+             -t ghcr.io/domnum/front:main \
+             -f Dockerfile .
+
+echo "✅ Imagem Docker criada com sucesso com as tags:"
+echo "  - ghcr.io/domnum/front:${IMAGE_VERSION}"
+echo "  - ghcr.io/domnum/front:main"
 
 echo "✅ Build.sh finalizado com sucesso!"
