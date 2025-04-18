@@ -1,13 +1,19 @@
 <div class="min-h-screen flex flex-col bg-gradient-to-b from-[var(--p-surface-0)] to-[var(--p-surface-50)] transition-all">
-  <header class="w-full flex items-center justify-between px-4 py-3">
-    <button mat-icon-button class="text-primary-500" (click)="toggleTheme()">
-      <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
-    </button>
+  <header class="w-full max-w-6xl mx-auto flex items-center justify-between px-4 py-3 mt-10">
+    <!-- Toggle Switch -->
+    <p-toggleSwitch
+    [ngModel]="isDarkTheme"
+    (ngModelChange)="toggleTheme()"
+    onIcon="pi-moon"
+    offIcon="pi pi-sun"
+  />
 
+    <!-- Logo centralizada -->
     <div class="absolute left-1/2 transform -translate-x-1/2">
       <app-logo class="text-primary-500 text-xl font-semibold" />
     </div>
 
+    <!-- Botão Entrar -->
     <button class="bg-primary-500 hover:bg-primary-600 text-white font-medium px-5 py-2 rounded-full transition-colors">
       Entrar
     </button>
