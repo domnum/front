@@ -24,24 +24,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Instalar dependências
-        run: npm ci
-
-      - name: Build Angular
-        run: npm run build -- --configuration production
-
-      - name: Gerar env.js com variáveis
+      - name: Run build.sh to build Docker image
         run: |
-          echo "window['env'] = {" > ./dist/domnum/env.js
-          echo "  BACKEND_URL: '${{ secrets.FRONTEND_BACKEND_URL }}'," >> ./dist/domnum/env.js
-          echo "  API_KEY: '${{ secrets.FRONTEND_API_KEY }}'" >> ./dist/domnum/env.js
-          echo "};" >> ./dist/domnum/env.js
-
-      - name: Preparar arquivos para o Docker
-        run: |
-          mkdir ./deploy
-          cp -r ./dist/domnum/* ./deploy/
-          cp ./nginx.conf ./deploy/
+          chmod +x build.sh
+          ./build.sh
 
       - name: Login no GitHub Container Registry
         uses: docker/login-action@v2
@@ -50,14 +36,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build da imagem Docker (NGINX + deploy)
-        run: |
-          docker build -t ghcr.io/domnum/front:${{ env.IMAGE_VERSION }} \
-                       -t ghcr.io/domnum/front:main \
-                       -f Dockerfile .
-
-      - name: Push da imagem versionada
-        run: docker push ghcr.io/domnum/front:${{ env.IMAGE_VERSION }}
+      - name: Push da imagem com tag versionada
+        run: docker push ghcr.io/domnum/front:1.0.${{ github.run_number }}
 
       - name: Push da imagem com tag main
         run: docker push ghcr.io/domnum/front:main
