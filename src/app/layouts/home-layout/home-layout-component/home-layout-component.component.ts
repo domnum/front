@@ -7,14 +7,16 @@ import { LogoComponent } from "../../../components/logo/logo.component";
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from "../../../components/footer/footer/footer.component";
+import { ToggleSwitch } from 'primeng/toggleswitch';
 
 @Component({
   selector: 'app-home-layout-component',
   imports: [AvatarModule, ToggleButtonModule,
-     FormsModule, 
-     LogoComponent,
-     MenubarModule,
-     RouterModule],
+    FormsModule,
+    LogoComponent,
+    MenubarModule,
+    RouterModule, FooterComponent, ToggleSwitch],
   templateUrl: './home-layout-component.component.html',
   styleUrl: './home-layout-component.component.css'
 })
@@ -32,24 +34,55 @@ export class HomeLayoutComponentComponent extends BaseComponent {
         {
           label: 'Todos os Cursos',
           icon: 'pi pi-list',
-          routerLink: '/cursos'
+          routerLink: '/pages/home/main/courses'
         },
         {
-          label: 'Meus Cursos',
-          icon: 'pi pi-user',
-          routerLink: '/meus-cursos'
-        }
+          label: 'Machine-Learning',
+          icon: 'pi pi-database',
+          routerLink: '/pages/home/main/courses?categoryname=machine-learning'
+        },
+        {
+          label: 'Programação',
+          icon: 'pi pi-code',
+          routerLink: '/pages/home/main/courses?categoryname=programacao'
+        },
+        {
+          label: 'Automação',
+          icon: 'pi pi-microchip',
+          routerLink: '/pages/home/main/courses?categoryname=automacao'
+        },
       ]
     },
     {
-      label: 'Sobre',
-      icon: 'pi pi-info-circle',
-      routerLink: '/sobre'
+      label: 'Certificados',
+      icon: 'pi pi-trophy',
+      routerLink: '/pages/home/main/certificados'
     },
     {
-      label: 'Contato',
-      icon: 'pi pi-envelope',
-      routerLink: '/contato'
-    }
+      label: 'IAs',
+      icon: 'pi pi-microchip-ai',
+      routerLink: '/pages/home/main/ias'
+    },
+    {
+      label: 'Conta',
+      icon: 'pi pi-user',
+      items: [
+        {
+          label: 'Logout',
+          icon: 'pi pi-sign-out',
+          routerLink: '/logout'
+        },
+        {
+          label: 'Gerenciamento de Conta',
+          icon: 'pi pi-user-edit',
+          routerLink: '/pages/home/main/edit-account'
+        },
+        {
+          label: 'Assinaturas',
+          icon: 'pi pi-credit-card',
+          routerLink: '/pages/home/main/assinaturas'
+        },        
+      ]
+    },
   ];
 }
