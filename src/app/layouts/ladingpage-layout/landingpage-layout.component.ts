@@ -9,6 +9,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { AnimateOnScrollModule } from 'primeng/animateonscroll';
+import { FooterComponent } from "../../components/footer/footer/footer.component";
 
 @Component({
   selector: 'app-landingpage-layout',
@@ -22,8 +23,9 @@ import { AnimateOnScrollModule } from 'primeng/animateonscroll';
     IconFieldModule,
     InputIconModule,
     InputTextModule,
-    AnimateOnScrollModule
-  ],
+    AnimateOnScrollModule,
+    FooterComponent
+],
   templateUrl: './landingpage-layout.component.html',
   styleUrl: './landingpage-layout.component.css'
 })
