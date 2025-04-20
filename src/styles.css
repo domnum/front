@@ -1,8 +1,8 @@
 @import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
