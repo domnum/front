@@ -1,0 +1,14 @@
+<p-card [header]="title" [subheader]="subtitle" [style]="{ width: '360px' }" styleClass="p-card-shadow">
+    <ng-template pTemplate="header" *ngIf="imageUrl">
+      <img alt="Card image" [src]="imageUrl">
+    </ng-template>
+    
+    <p>{{ content }}</p>
+    
+    <ng-template pTemplate="footer" *ngIf="showFooter">
+      <div class="flex flex-wrap justify-content-end gap-2">
+        <p-button label="Save" icon="pi pi-check"></p-button>
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-outlined p-button-secondary"></p-button>
+      </div>
+    </ng-template>
+  </p-card>

@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { LogoComponent } from "../../components/logo/logo.component";
 import { FormsModule } from '@angular/forms'; // 👈 Import necessário para ngModel
+import { ButtonModule } from 'primeng/button';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-landingpage-layout',
@@ -14,7 +16,9 @@ import { FormsModule } from '@angular/forms'; // 👈 Import necessário para ng
     MatIcon,
     ToggleSwitch,
     LogoComponent,
-    FormsModule 
+    FormsModule,
+    ButtonModule,
+    CardComponent 
   ],
   templateUrl: './landingpage-layout.component.html',
   styleUrl: './landingpage-layout.component.css'
