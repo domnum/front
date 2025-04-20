@@ -3,7 +3,7 @@ import { BaseComponent } from '../../shared/base/base.component';
 import { RouterModule } from '@angular/router';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { LogoComponent } from "../../components/logo/logo.component";
-import { FormsModule } from '@angular/forms'; // 👈 Import necessário para ngModel
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';

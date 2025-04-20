@@ -1,0 +1,22 @@
+<div class="header">
+  <div class="header-container">
+    <header class="w-full px-4 py-4">
+      <div class="max-w-6xl mx-auto flex justify-center">
+        <div class="flex items-center gap-x-10">
+          <div class="flex items-center gap-x-2">
+            <app-logo></app-logo>
+          </div>
+          <p-menubar
+            [model]="items"
+            class="bg-white/10 backdrop-blur-sm rounded-md text-white border-none shadow-md"
+          ></p-menubar>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+  <!-- Conteúdo da Home -->
+  <main class="container mx-auto px-4 py-6">
+    <router-outlet></router-outlet>
+  </main>
+  

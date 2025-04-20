@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: LandingpageLayoutComponent,
     children: [
       {
-        path: 'Landing',
+        path: 'landing',
         component: LandingPageComponent
       }
     ]

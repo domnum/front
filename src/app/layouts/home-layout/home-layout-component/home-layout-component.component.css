@@ -1,0 +1,12 @@
+.header
+{
+    background-color: transparent;
+}
+
+.header-container
+{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+}
