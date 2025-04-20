@@ -1,1 +1,104 @@
-<p>landingpage works!</p>
+<main>
+    <div>
+        <body>
+            <div class="flex justify-center items-center px-4 py-4">
+              <ng-content select="[header]">
+                <p-iconfield class="w-80 sm:w-96 md:w-[32rem] max-w-full">
+                  <p-inputicon styleClass="pi pi-search" />
+                  <input type="text" pInputText placeholder="Pesquisar" class="w-80 sm:w-96 md:w-[32rem] max-w-full" />
+                </p-iconfield>
+              </ng-content>
+            </div>
+      
+            <div class="flex justify-center items-center px-4 py-12">
+              <span class="text-center font-roboto-serif text-base text-primary-200 max-w-2xl">
+                Descubra o poder da Inteligência Artificial! Transforme ideias em soluções inovadoras e explore um mundo de
+                possibilidades
+              </span>
+            </div>
+      
+            <div class="flex flex-wrap justify-center gap-8 px-4 py-12">
+              <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+              </app-card>
+      
+              <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+              </app-card>
+      
+              <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+              </app-card>
+            </div>
+      
+            <div class="flex flex-col items-center gap-2">
+              <span class="text-center font-roboto-serif text-base text-primary-200 max-w-2xl">
+                Cursos mais assistidos
+              </span>
+              <span
+                class="animate-bounce h-8 w-8 bg-primary text-primary-contrast rounded-full inline-flex items-center justify-center">
+                <i class="pi pi-arrow-down"></i>
+              </span>
+            </div>
+            <div class="h-[5rem]"></div>
+      
+            <div class="flex flex-col items-center px-4 py-4">
+              <span class="text-center font-roboto-serif text-sm text-primary-200 max-w-2xl mb-6">
+                Assuntos gerais
+              </span>
+      
+              <div class="flex flex-wrap justify-center gap-8 px-4 py-8">
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+      
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+      
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+              </div>
+            </div>
+            <div class="h-[20rem]"></div>
+      
+            <div class="flex flex-col items-center px-4 py-4">
+              <span class="text-center font-roboto-serif text-sm text-primary-200 max-w-2xl mb-6">
+                Aplicados a programação
+              </span>
+      
+              <div class="flex flex-wrap justify-center gap-6">
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+      
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+      
+                <app-card title="Exemplo de Card" subtitle="conteúdo do Card" content="" imageUrl="">
+                </app-card>
+              </div>
+            </div>
+            <div class="h-[20rem]"></div>
+      
+            <div class="flex flex-col items-center px-4 py-4">
+              <span class="text-center font-roboto-serif text-lg text-primary-200 max-w-2xl mb-6">
+                Explore nossos planos
+              </span>
+      
+              <div class="flex flex-wrap justify-center gap-6">
+                <app-card title="Plano Pro" subtitle="conteúdo do Card" content=" - Benefício um <br> - Segunda linha <br> - Benefício
+              três <br> -  Benefício quatro <br> - Benefício cinco" [showButton]="true" buttonLabel="Escolher"
+                  buttonVariant="outlined" buttonSeverity="info" buttonStyleClass="w-full sm:w-auto" buttonLink="/login">
+                </app-card>
+      
+                <app-card title="Plano Premium" subtitle="conteúdo do Card" content=" - Benefício um <br> - Segunda linha <br> - Benefício
+              três <br> -  Benefício quatro <br> - Benefício cinco" [showButton]="true" buttonLabel="Escolher"
+                  buttonVariant="outlined" buttonSeverity="info" buttonStyleClass="w-full sm:w-auto" buttonLink="/login">
+                </app-card>
+      
+                <app-card title="Plano Enterprise" subtitle="conteúdo do Card" content=" - Benefício um <br> - Segunda linha <br> - Benefício
+              três <br> -  Benefício quatro <br> - Benefício cinco" [showButton]="true" buttonLabel="Escolher"
+                  buttonVariant="outlined" buttonSeverity="info" buttonStyleClass="w-full sm:w-auto" buttonLink="/login">
+                </app-card>
+      
+              </div>
+            </div>
+            <div class="h-[5rem]"></div>
+          </body>
+    </div>
+</main>

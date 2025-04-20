@@ -71,3 +71,8 @@
   align-items: start;
   padding-top: 3rem;
 }
+
+.pi-search {
+  color: #888;
+  font-size: 1.2rem;
+}

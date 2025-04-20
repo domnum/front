@@ -5,9 +5,9 @@ import { LandingPageComponent } from './lading/ladingpage/landingpage.component'
 export const routes: Routes = [
   {
     path: '',
-    component: LandingpageLayoutComponent,
+    component: LandingPageComponent,
     children: [
-      { path: 'landing', component: LandingPageComponent}, 
+      { path: 'landing', component: LandingpageLayoutComponent}, 
       { path: '', redirectTo: 'landing', pathMatch: 'full' }
     ]
   },
