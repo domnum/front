@@ -1,0 +1,30 @@
+.custom-toggle {
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    background-color: var(--p-surface-0);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    padding: 0.2rem;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-toggle i {
+    background-color: #2FB7F4;
+    color: #0e1a26;
+    border-radius: 50%;
+    padding: 0.25rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .custom-toggle.active {
+    justify-content: flex-end;
+  }
+
+  :host {
+    display: flex;
+    align-items: center;
+  }
+  
