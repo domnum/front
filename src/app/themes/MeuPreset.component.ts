@@ -4,17 +4,17 @@ import Aura from '@primeng/themes/aura';
 const MeuPreset = definePreset(Aura, {
   semantic: {
     primary: {
-      50: '#e0f2ff',
-      100: '#b3d8ff',
-      200: '#80bfff',
-      300: '#4da6ff',
-      400: '#2694ff',
-      500: '#0080ff',     
-      600: '#0066cc',
-      700: '#004d99',
-      800: '#003366',
-      900: '#001a33',
-      950: '#000d1a'
+      50:  '#e1f6fd',
+      100: '#b6e9fa',
+      200: '#8bdcf7',
+      300: '#60cff5',
+      400: '#35c2f2',
+      500: '#2FB7F4', // Azul principal ajustado
+      600: '#2793c2',
+      700: '#1f6f91',
+      800: '#174b60',
+      900: '#0f2730',
+      950: '#081218'
     },
     colorScheme: {
       light: {

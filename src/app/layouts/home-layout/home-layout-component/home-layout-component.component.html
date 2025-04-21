@@ -1,0 +1,52 @@
+<div class="back-ground">
+  <div class="header">
+    <div class="header-container">
+      <header class="w-full px-4 py-4">
+        <div class="mx-auto flex justify-center">
+          <div class="flex items-center gap-x-10">
+            <div class="flex items-center gap-x-2">
+              <a routerLink="/pages/home/main" class="flex items-center">
+                <app-logo></app-logo>
+              </a>
+            </div>
+            <p-menubar
+            [model]="items"
+            class="bg-white/10 backdrop-blur-sm rounded-md text-white border-none shadow-md"
+          >
+            <ng-template pTemplate="start">
+              <input
+                pInputText
+                [(ngModel)]="value1"
+                type="text"
+                pSize="small"
+                placeholder="Pesquisar"
+                class="mr-4"
+              />
+            </ng-template>
+          
+            <ng-template pTemplate="end">
+              <div class="flex items-center">
+                <app-theme-toggle [(value)]="isDarkTheme" class="ml-4" />
+              </div>
+            </ng-template>
+          </p-menubar>
+          <div class="mb-2 sm:mb-0 sm:mr-4 order-1 sm:order-1">
+              <p-avatar
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+              class="mr-2 cursor-pointer"
+              shape="circle"
+              size="large"
+              (click)="onAvatarClick()"
+            />
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+  <main class="container mx-auto px-4 py-6 flex-1">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer></app-footer>
+</div>
+  

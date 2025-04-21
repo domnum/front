@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,3 +8,34 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+
+:root{
+    --p-menubar-background: transparent !important;
+    --p-menubar-border-color: transparent !important;
+    --p-form-field-background: transparent !important;
+    --p-card-background: transparent !important;
+    --p-card-color: var(--p-primary-400) !important;
+    --p-inputtext-color: var(--p-primary-400) !important;
+    --p-inputtext-background: var(--p-surface-0) !important;
+    --p-inputtext-border-color: var(--p-primary-400) !important;
+    --p-inputtext-hover-border-color: var(--p-primary-400) !important;
+    --p-megamenu-item-link-color: var(--p-primary-400) !important;
+    --p-icon-size: 1.1rem !important;
+    --p-drawer-background: linear-gradient(190deg, rgba(86, 6, 160, 0.85), rgba(52, 6, 107, 0.85)) !important;
+    --p-drawer-border-radius: 16px !important;
+    --p-menubar-item-focus-background : var(--p-primary-400) !important;
+    --p-menubar-item-active-background: var(--p-primary-400) !important;
+    --p-navigation-item-color: var(--p-primary-400) !important;
+    --p-menubar-item-focus-color: var(--p-surface-0) !important;
+    --p-menubar-item-icon-color: var(--p-primary-400) !important;
+    --p-menubar-submenu-background: var(--p-surface-0) !important;
+  }
+
+  ::ng-deep input::placeholder {
+    color: #2FB7F4; /* ou qualquer cor que quiser */
+    opacity: 1; /* Garante que a cor será visível */
+  }
+
+  input::placeholder {
+    color: #2FB7F4;
+  }

@@ -10,6 +10,7 @@ import MeuPreset from './themes/MeuPreset.component';
 import { HTTP_CLIENT_SERVICE } from './services/dependency-injection-factory.service';
 import { HttpClientService } from './services/http-client.service';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
       }
     }), 
     provideHttpClient(),
+    provideAnimations(),
 
     { provide: HTTP_CLIENT_SERVICE, useClass: HttpClientService },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
