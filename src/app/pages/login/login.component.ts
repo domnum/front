@@ -8,53 +8,44 @@ import { LogoComponent } from "../../components/logo/logo.component";
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
-
+import { CommonModule } from '@angular/common'; 
 
 @Component({
     selector: 'divider-login-demo',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [DividerModule, ButtonModule, InputTextModule, ReactiveFormsModule,
-        LogoComponent,FormsModule, PasswordModule,CheckboxModule]
+    imports: [CommonModule, DividerModule, ButtonModule, InputTextModule, ReactiveFormsModule,
+        LogoComponent, FormsModule, PasswordModule, CheckboxModule]
 })
 
-
 export class LoginComponent implements OnInit {
-    loginForm!: FormGroup;  // Usando o operador de asserção não nula '!'
+    loginForm!: FormGroup;
     darkMode: boolean = false;
+    email: string = '';
+    password: string = '';
+
     constructor(private fb: FormBuilder) { }
 
     ngOnInit(): void {
+        // Formulário com validação
         this.loginForm = this.fb.group({
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            email: ['', [Validators.required, Validators.email]],  // Validação de email
+            password: ['', [Validators.required, Validators.minLength(6)]]  // Validação de senha
         });
     }
 
     onLogin() {
-        const { username, password } = this.loginForm.value;
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/;
-
-        if (!regex.test(password)) {
-            alert('A senha deve conter pelo menos:\n- Uma letra maiúscula\n- Uma letra minúscula\n- Um caractere especial');
-            return;
-        }
-        if (password.length < 6) {
-            alert('A senha não pode ser menor que 6 caracteres!');
-            return;
-        }
         if (this.loginForm.valid) {
-            alert('Login efetuado com');
-            // Aqui você pode chamar um serviço de login, etc.
+            const { email, password } = this.loginForm.value;
+            console.log('Email:', email);
+            console.log('Senha:', password);
+            alert('Login efetuado com sucesso!');
+            // Aqui você pode adicionar sua lógica de autenticação com o email e senha
         } else {
-            alert('Inválido!');
+            alert('Formulário inválido!');
         }
-
     }
 
-    username: string = '';
-    password: string = '';
     checked: boolean = false;
-    email: string = '';
 }

@@ -56,11 +56,15 @@
 
 
 
-.custom-login-button .p-button:hover {
-    background-color: #3f5ba0;
-    opacity: 0.85;
-  }
+.custom-login-button .p-button {
+  background-color: #526eb3;
+  color: #fff;
+  border: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
 
-   .custom-login-button .p-button {
-    transition: all 0.3s ease;
-  }
+.custom-login-button .p-button:hover {
+  background-color: #3f5ba0;
+  opacity: 0.85;
+}
