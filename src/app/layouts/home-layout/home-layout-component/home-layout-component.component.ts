@@ -9,6 +9,9 @@ import { MenuItem } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from "../../../components/footer/footer/footer.component";
 import { ToggleSwitch } from 'primeng/toggleswitch';
+import { InputTextModule } from 'primeng/inputtext';
+import { ThemeToggleComponent } from "../../../components/theme-toggle/theme-toggle.component";            
+
 
 @Component({
   selector: 'app-home-layout-component',
@@ -16,11 +19,16 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
     FormsModule,
     LogoComponent,
     MenubarModule,
-    RouterModule, FooterComponent, ToggleSwitch],
+    RouterModule, FooterComponent, ToggleSwitch,
+    InputTextModule, ThemeToggleComponent],
   templateUrl: './home-layout-component.component.html',
   styleUrl: './home-layout-component.component.css'
 })
 export class HomeLayoutComponentComponent extends BaseComponent {
+onAvatarClick() {
+throw new Error('Method not implemented.');
+}
+  value1: string = "";
   items: MenuItem[] = [
     {
       label: 'Início',

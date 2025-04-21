@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { LogoComponent } from '../../logo/logo.component';
+import { LogoSimplesComponent } from "../../logo-simples/logo-simples/logo-simples.component";
+import { LogoComponent } from "../../logo/logo.component";
 
 @Component({
   selector: 'app-footer',
-  imports: [LogoComponent],
+  imports: [LogoSimplesComponent, LogoComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
