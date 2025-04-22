@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingpageLayoutComponent } from './layouts/ladingpage-layout/landingpage-layout.component';
 import { LandingPageComponent } from './lading/ladingpage/landingpage.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 export const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,10 @@ export const routes: Routes = [
   {
         path: 'login',
         component: LoginComponent  
+      },
+      {
+        path: 'cadastro',
+        component: CadastroComponent  
       },
   {
     path: '**',

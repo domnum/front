@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CommonModule } from '@angular/common'; 
+import { RouterModule } from '@angular/router';
+
 
 @Component({
     selector: 'divider-login-demo',
@@ -16,7 +18,7 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['./login.component.scss'],
     standalone: true,
     imports: [CommonModule, DividerModule, ButtonModule, InputTextModule, ReactiveFormsModule,
-        LogoComponent, FormsModule, PasswordModule, CheckboxModule]
+        LogoComponent, FormsModule, PasswordModule, CheckboxModule,RouterModule]
 })
 
 export class LoginComponent implements OnInit {
