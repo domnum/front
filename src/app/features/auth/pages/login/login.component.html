@@ -1,0 +1,24 @@
+<div class="back-ground">
+    <div class="flex flex-col items-center justify-center w-full max-w-md mx-auto px-4">
+        <div class="w-full">
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <app-logo />
+                </div>
+                <span class="text-muted-color font-medium">Faça login para continuar</span>
+            </div>
+
+            <app-form-builder
+                [fields]="loginFields"
+                [form]="loginForm"
+                [submitButtonLabel]="'Entrar'"
+                (formSubmit)="onLogin()">
+            </app-form-builder>
+
+            <div class="flex items-center justify-between mt-4 w-full">
+                <a [routerLink]="['/esqueceu-senha']" class="text-sm">Esqueceu sua senha?</a>
+                <a [routerLink]="['/cadastro']" class="text-sm">Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+</div>

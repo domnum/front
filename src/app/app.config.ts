@@ -7,10 +7,10 @@ import { providePrimeNG } from 'primeng/config';
 
 import { routes } from './app.routes';
 import MeuPreset from './themes/MeuPreset.component';
-import { HTTP_CLIENT_SERVICE } from './services/dependency-injection-factory.service';
-import { HttpClientService } from './services/http-client.service';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { HTTP_CLIENT_SERVICE } from './core/auth/services/dependency-injection-factory.service';
+import { HttpClientService } from './core/auth/services/http-client.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

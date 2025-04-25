@@ -1,31 +1,29 @@
 import { Routes } from '@angular/router';
-import { LandingpageLayoutComponent } from './layouts/ladingpage-layout/landingpage-layout.component';
-import { LandingPageComponent } from './lading/ladingpage/landingpage.component';
-import { LoginComponent } from './pages/login/login.component';
-import { CadastroComponent } from './pages/cadastro/cadastro.component';
+
 export const routes: Routes = [
   {
     path: '',
-    component: LandingpageLayoutComponent,
-    children: [
-      { path: 'landing', component: LandingPageComponent}, 
-      { path: '', redirectTo: 'landing', pathMatch: 'full' },
-    ]
+    redirectTo: 'landing',
+    pathMatch: 'full'
   },
   {
-     path: 'pages',
-     loadChildren: () => import('./pages/routes').then(m => m.routes)
+    path: 'auth',
+    loadChildren: () => import('./features/auth/pages/auth.routes').then(m => m.AUTH_ROUTES)
   },
   {
-        path: 'login',
-        component: LoginComponent  
-      },
-      {
-        path: 'cadastro',
-        component: CadastroComponent  
-      },
+    path: 'home',
+    loadChildren: () => import('./features/home/pages/home.routes').then(m => m.HOME_ROUTES)
+  },
+  {
+    path: 'landing',
+    loadChildren: () => import('./features/landing/pages/landing.routes').then(m => m.LANDING_ROUTES)
+  },
+  {
+    path: 'not-found',
+    loadComponent: () => import('./shared/components/not-found/not-found.component').then(m => m.NotFoundComponent)
+  },
   {
     path: '**',
-    redirectTo: 'landing'
+    redirectTo: 'not-found'
   }
 ];

@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Directive, Inject, PLATFORM_ID } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, NavigationExtras } from '@angular/router';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Directive()
 export abstract class BaseComponent {
