@@ -11,6 +11,10 @@
 npm-debug.log
 yarn-error.log
 
+.package-lock.json
+.env
+.env.* # Ignora qualquer arquivo .env com sufixos, como .env.prod ou .env.local
+
 # IDEs and editors
 .idea/
 .project

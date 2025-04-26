@@ -72,8 +72,19 @@ export interface FormField {
       </ng-container>
 
       <div class="button-container">
-        <button pButton type="submit" [disabled]="form.invalid" label="{{ submitButtonLabel }}"></button>
-      </div>
+      <button 
+        pButton 
+        type="submit" 
+        [disabled]="form.invalid || isLoading" 
+        class="loading-button">
+        <ng-container *ngIf="!isLoading; else loadingTemplate">
+          {{ submitButtonLabel }}
+        </ng-container>
+        <ng-template #loadingTemplate>
+          <i class="pi pi-spin pi-spinner"></i>
+        </ng-template>
+      </button>
+    </div>
     </form>
   `,
   styles: [`
@@ -167,11 +178,17 @@ export class FormBuilderComponent implements OnInit {
 
   @Output() formSubmit = new EventEmitter<any>();
 
+  isLoading: boolean = false; 
   ngOnInit() {}
 
   onSubmit() {
     if (this.form.valid) {
+      this.isLoading = true; 
       this.formSubmit.emit(this.form.value);
+
+      setTimeout(() => {
+        this.isLoading = false; 
+      }, 1000);
     }
   }
 

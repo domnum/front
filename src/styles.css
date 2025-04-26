@@ -4,12 +4,62 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background-color: var(--background-color) !important;
+color: var(--p-primary-400);
+transition: background-color
+}
+@import 'assets/scss/variables';
 
 
 
-:root{
+.snackbar-success {
+  background-color: #4CAF50 !important; /* Verde */
+  color: white !important;
+}
+
+.snackbar-error {
+  background-color: #f44336 !important; /* Vermelho */
+  color: white !important;
+}
+
+.snackbar-warning {
+  background-color: #ff9800 !important; /* Laranja */
+  color: black !important;
+}
+
+.mat-mdc-snack-bar-container {
+  border-radius: 5px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}
+
+.mat-mdc-snack-bar-action {
+  color: white !important; /* Para o botão "Fechar" ficar sempre branco */
+}
+
+
+:root {
+    --background-gradient: linear-gradient(
+      to bottom,
+      var(--p-surface-0),
+      var(--p-surface-50),
+      var(--p-surface-50),
+      var(--p-surface-50)
+    );
+
+    transition: background-color 0.5s ease-in-out, 
+    color 0.5s ease-in-out, 
+    border-color 0.5s ease-in-out;
+    
     --p-menubar-background: transparent !important;
     --p-menubar-border-color: transparent !important;
     --p-form-field-background: transparent !important;
@@ -29,13 +79,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --p-menubar-item-focus-color: var(--p-surface-0) !important;
     --p-menubar-item-icon-color: var(--p-primary-400) !important;
     --p-menubar-submenu-background: var(--p-surface-0) !important;
-  }
+}
 
-  ::ng-deep input::placeholder {
-    color: #2FB7F4; /* ou qualquer cor que quiser */
-    opacity: 1; /* Garante que a cor será visível */
-  }
+::ng-deep input::placeholder {
+  color: #2FB7F4; /* ou qualquer cor que quiser */
+  opacity: 1; /* Garante que a cor será visível */
+}
 
-  input::placeholder {
-    color: #2FB7F4;
-  }
+input::placeholder {
+  color: #2FB7F4;
+}

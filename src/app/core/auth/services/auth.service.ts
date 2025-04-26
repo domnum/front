@@ -23,7 +23,6 @@ export class AuthService {
       tap(response => {
         if (response && response.token) {
           this.tokenService.setToken(response.token);
-          this.router.navigate(['/home']);
         }
       })
     );

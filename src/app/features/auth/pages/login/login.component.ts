@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,6 +12,9 @@ import { finalize } from 'rxjs';
 import { FormBuilderComponent, FormField } from '../../../../shared/components/form-builder/form-builder.component';
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
 import { AuthService } from '../../../../core/auth/services/auth.service';
+import { BaseComponent } from '../../../../shared/base/base.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +24,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
     imports: [CommonModule, DividerModule, ButtonModule, InputTextModule, ReactiveFormsModule,
         LogoComponent, FormsModule, PasswordModule, RouterModule, FormBuilderComponent]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
     loginForm: FormGroup;
     loading: boolean = false;
 
@@ -61,8 +64,12 @@ export class LoginComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        protected override router: Router,
+        protected override snackBar: MatSnackBar,
+        @Inject(PLATFORM_ID) protected override platformId: Object,
+        protected override themeService: ThemeService
     ) {
+        super(snackBar, router, platformId, themeService);
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]]
@@ -70,7 +77,6 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // Se já estiver autenticado, redireciona para home
         this.authService.isAuthenticated().subscribe(isAuthenticated => {
             if (isAuthenticated) {
                 this.router.navigate(['/home']);
@@ -89,8 +95,8 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/home']);
                     },
                     error: (error) => {
-                        console.error('Erro no login:', error);
-                        // Aqui você pode adicionar uma notificação de erro
+                        this.loading = false;
+                        this.showMessage(error, 'error');
                     }
                 });
         }

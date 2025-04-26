@@ -3,13 +3,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IHttpClient } from '../../interfaces/http-client.interface';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService implements IHttpClient {
-  private apiUrl = (window as any)['env']?.BACKEND_URL || 'https://api.example.com';
-  private apiKey = (window as any)['env']?.API_KEY || '';
+  private apiUrl = environment.BACKEND_URL || 'https://api.example.com';
+  private apiKey = environment.API_KEY || '';
 
   constructor(private http: HttpClient) {}
 
