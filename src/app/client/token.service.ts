@@ -34,10 +34,10 @@ export class TokenService {
   async getAccessToken(): Promise<AccessToken | null> {
     const token = this.getToken();
     if (!token) return null;
-
+  
     const payload = this.decodeToken(token);
     if (!payload || !payload.exp) return null;
-
+  
     return {
       token: token,
       expiresOnTimestamp: payload.exp * 1000, 

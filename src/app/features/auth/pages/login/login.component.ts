@@ -16,6 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ThemeService } from '../../../../core/services/theme.service';
 import { Presentation } from '../../../../client/src';
 import { TokenService } from '../../../../client/token.service';
+import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -64,8 +66,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private authService: Presentation,
-        private TokenService: TokenService,
+        private authService: AuthService,
+        private tokenService: TokenService,
         protected override router: Router,
         protected override snackBar: MatSnackBar,
         @Inject(PLATFORM_ID) protected override platformId: Object,
@@ -79,7 +81,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.TokenService.isAuthenticated().subscribe(isAuthenticated => {
+        this.tokenService.isAuthenticated().subscribe(isAuthenticated => {
             if (isAuthenticated) {
                 this.router.navigate(['/home']);
             }
@@ -88,20 +90,35 @@ export class LoginComponent extends BaseComponent implements OnInit {
     onLogin(): void {
         if (this.loginForm.valid) {
           this.loading = true;
-          from(this.authService.userLogin(this.loginForm.value))
-            .pipe(finalize(() => this.loading = false))
-            .subscribe({
-              next: (response) => {
-                if (response?.token) {
-                  this.TokenService.setToken(response.token);
-                  this.router.navigate(['/home']);
-                } else {
-                  this.showMessage('Login falhou: Token não recebido.', 'error');
-                }
-              },
-              error: (error) => {
-                this.showMessage(error || 'Erro ao realizar login.', 'error');
+      
+          this.authService.getPresentation() 
+            .then(async (presentation) => {
+              const loginData = this.loginForm.value;
+      
+              const response = await fetch(`${environment.BACKEND_URL}/User/Login`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-API-KEY': environment.API_KEY,
+                },
+                body: JSON.stringify(loginData),
+              }).then((res) => res.json());
+      
+              if (response?.token) {
+                this.tokenService.setToken(response.token);
+                this.authService.resetPresentation();
+                await this.authService.getPresentation(); 
+      
+                this.router.navigate(['/home']);
+              } else {
+                this.showMessage('Login falhou: Token não recebido.', 'error');
               }
+            })
+            .catch((error) => {
+              this.showMessage(error.message || 'Erro ao realizar login.', 'error');
+            })
+            .finally(() => {
+              this.loading = false;
             });
         }
       }
