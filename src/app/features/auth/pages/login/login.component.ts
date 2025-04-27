@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common'; 
 import { RouterModule, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { finalize, from } from 'rxjs';
 import { FormBuilderComponent, FormField } from '../../../../shared/components/form-builder/form-builder.component';
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
-import { AuthService } from '../../../../core/auth/services/auth.service';
 import { BaseComponent } from '../../../../shared/base/base.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ThemeService } from '../../../../core/services/theme.service';
+import { Presentation } from '../../../../client/src';
+import { TokenService } from '../../../../client/token.service';
 
 @Component({
     selector: 'app-login',
@@ -63,11 +64,12 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private authService: AuthService,
+        private authService: Presentation,
+        private TokenService: TokenService,
         protected override router: Router,
         protected override snackBar: MatSnackBar,
         @Inject(PLATFORM_ID) protected override platformId: Object,
-        protected override themeService: ThemeService
+        @Inject(ThemeService) protected override themeService: ThemeService
     ) {
         super(snackBar, router, platformId, themeService);
         this.loginForm = this.fb.group({
@@ -77,28 +79,30 @@ export class LoginComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.isAuthenticated().subscribe(isAuthenticated => {
+        this.TokenService.isAuthenticated().subscribe(isAuthenticated => {
             if (isAuthenticated) {
                 this.router.navigate(['/home']);
             }
         });
     }
-
     onLogin(): void {
         if (this.loginForm.valid) {
-            this.loading = true;
-            
-            this.authService.login(this.loginForm.value)
-                .pipe(finalize(() => this.loading = false))
-                .subscribe({
-                    next: () => {
-                        this.router.navigate(['/home']);
-                    },
-                    error: (error) => {
-                        this.loading = false;
-                        this.showMessage(error, 'error');
-                    }
-                });
+          this.loading = true;
+          from(this.authService.userLogin(this.loginForm.value))
+            .pipe(finalize(() => this.loading = false))
+            .subscribe({
+              next: (response) => {
+                if (response?.token) {
+                  this.TokenService.setToken(response.token);
+                  this.router.navigate(['/home']);
+                } else {
+                  this.showMessage('Login falhou: Token não recebido.', 'error');
+                }
+              },
+              error: (error) => {
+                this.showMessage(error || 'Erro ao realizar login.', 'error');
+              }
+            });
         }
-    }
+      }
 }

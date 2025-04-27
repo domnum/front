@@ -9,13 +9,13 @@ export const HOME_ROUTES: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'home',
+        path: '',
         loadComponent: () => import('./home-page-component/home-page-component.component').
-            then(m => m.HomePageComponentComponent)
+            then(m => m.HomePageComponent)
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: '',
         pathMatch: 'full'
       }
     ]

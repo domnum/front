@@ -7,8 +7,12 @@ echo "🧹 Limpando pastas antigas..."
 rm -rf dist/
 rm -rf deploy/
 
-# 📦 Instala dependências
-echo "📥 Instalando dependências..."
+# 🛠️ Gera o cliente AutoRest
+echo "⚙️ Gerando cliente AutoRest..."
+bash autorest.sh
+
+# 📦 Instala dependências do projeto Angular
+echo "📥 Instalando dependências do Angular..."
 npm ci
 
 # ⚙️ Build Angular
@@ -27,12 +31,13 @@ if [ ! -f "$BUILD_PATH/index.html" ]; then
   exit 1
 fi
 
-# 📂 Cria pasta deploy com os arquivos prontos pro Docker
+# 📂 Cria pasta deploy com os arquivos prontos para o Docker
 echo "📦 Preparando pasta deploy/"
 mkdir deploy
 cp -r $BUILD_PATH/* deploy/
 cp nginx.conf deploy/
 
+# 🐳 Construindo imagem Docker
 echo "🐳 Construindo imagem Docker..."
 docker build -t ghcr.io/domnum/front:${IMAGE_VERSION} \
              -t ghcr.io/domnum/front:main \

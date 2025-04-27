@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms'; 
 import { RouterModule } from '@angular/router';
@@ -33,7 +33,9 @@ import { ThemeService } from '../../../../core/services/theme.service';
   styleUrl: './landingpage.component.css'
 })
 export class LandingPageComponent extends BaseComponent {
-  constructor(protected override themeService: ThemeService) {
+  constructor(
+    @Inject(ThemeService) protected override themeService: ThemeService
+  ) {
     super();
   }
 }

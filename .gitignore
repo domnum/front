@@ -1,19 +1,22 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
-
 # Node
 /node_modules
+/src/app/client/node_modules
 npm-debug.log
 yarn-error.log
 
+# Build
+/dist
+/src/app/client/dist
+
+# Alternativa mais agressiva (ignora qualquer dist em qualquer pasta)
+# **/dist/
+
+# Pacotes lockfile
 .package-lock.json
+
+# Variáveis de ambiente
 .env
-.env.* # Ignora qualquer arquivo .env com sufixos, como .env.prod ou .env.local
+.env.*
 
 # IDEs and editors
 .idea/

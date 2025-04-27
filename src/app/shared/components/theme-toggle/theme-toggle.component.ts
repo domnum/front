@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { NgClass } from '@angular/common'; 
 import { BaseComponent } from '../../base/base.component';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -12,6 +13,10 @@ import { BaseComponent } from '../../base/base.component';
 export class ThemeToggleComponent extends BaseComponent {
   @Input() value: boolean = false;
   @Output() valueChange = new EventEmitter<boolean>();
+
+  constructor(@Inject(ThemeService) themeService: ThemeService) {
+    super();
+  }
 
   onToggleClick() {
     this.toggleTheme(); 

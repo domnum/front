@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AccessToken } from '@azure/core-auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
   private readonly TOKEN_KEY = 'access_token';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
 
   constructor() {
-    // Verificar o token quando o serviço é inicializado
     this.checkTokenValidity();
   }
 
@@ -29,6 +29,19 @@ export class TokenService {
 
   isAuthenticated(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
+  }
+
+  async getAccessToken(): Promise<AccessToken | null> {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = this.decodeToken(token);
+    if (!payload || !payload.exp) return null;
+
+    return {
+      token: token,
+      expiresOnTimestamp: payload.exp * 1000, 
+    };
   }
 
   private hasValidToken(): boolean {
@@ -55,4 +68,12 @@ export class TokenService {
       return null;
     }
   }
-} 
+
+  getStudentId(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = this.decodeToken(token);
+    return payload?.StudentId || null;
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "presentation",
+  "sdk-type": "mgmt",
+  "author": "Microsoft Corporation",
+  "description": "A generated SDK for Presentation.",
+  "version": "1.0.0-beta.1",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@azure/core-client": "^1.7.0",
+    "@azure/core-auth": "^1.6.0",
+    "@azure/core-rest-pipeline": "^1.14.0",
+    "tslib": "^2.2.0"
+  },
+  "keywords": [
+    "node",
+    "azure",
+    "typescript",
+    "browser",
+    "isomorphic"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist-esm/index.js",
+  "types": "./types/presentation.d.ts",
+  "devDependencies": {
+    "typescript": "~5.8.2",
+    "dotenv": "^16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/azure-sdk-for-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/azure-sdk-for-js/issues"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map",
+    "dist-esm/**/*.js",
+    "dist-esm/**/*.js.map",
+    "dist-esm/**/*.d.ts",
+    "dist-esm/**/*.d.ts.map",
+    "src/**/*.ts",
+    "README.md",
+    "LICENSE",
+    "tsconfig.json",
+    "review/*",
+    "CHANGELOG.md",
+    "types/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist"
+  },
+  "sideEffects": false,
+  "//metadata": {
+    "constantPaths": [
+      {
+        "path": "src/presentation.ts",
+        "prefix": "packageDetails"
+      }
+    ]
+  },
+  "autoPublish": true
+}

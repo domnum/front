@@ -9,8 +9,9 @@ import { routes } from './app.routes';
 import MeuPreset from './themes/MeuPreset.component';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { HTTP_CLIENT_SERVICE } from './core/auth/services/dependency-injection-factory.service';
-import { HttpClientService } from './core/auth/services/http-client.service';
+import { Presentation } from './client/src/presentation';
+import { environment } from '../environments/environment';
+import { TokenService } from './client/token.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,7 +30,25 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
 
-    { provide: HTTP_CLIENT_SERVICE, useClass: HttpClientService },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    {
+      provide: Presentation,
+      useFactory: (tokenService: TokenService) => {
+        const credentials = {
+          getToken: async () => {
+            const token = tokenService.getToken();
+            if (!token) {
+              return null;
+            }
+    
+            const expiresOnTimestamp = Date.now() + 3600 * 1000; 
+            return { token, expiresOnTimestamp };
+          },
+        };
+    
+        const baseUrl = environment.BACKEND_URL;  
+        return new Presentation(credentials, baseUrl);
+      },
+      deps: [TokenService], 
+    },
   ]
 };
