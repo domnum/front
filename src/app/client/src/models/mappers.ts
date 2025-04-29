@@ -1,5 +1,77 @@
 import * as coreClient from "@azure/core-client";
 
+export const BaseResponseListUseCasesCategoryGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesCategoryGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesCategoryGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
+export const FluntNotificationsNotification: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "FluntNotificationsNotification",
+    modelProperties: {
+      key: {
+        serializedName: "key",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      message: {
+        serializedName: "message",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+    },
+  },
+};
+
 export const UseCasesCategoryGetAllResponse: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -79,28 +151,48 @@ export const BaseResponseSystemObject: coreClient.CompositeMapper = {
   },
 };
 
-export const FluntNotificationsNotification: coreClient.CompositeMapper = {
-  type: {
-    name: "Composite",
-    className: "FluntNotificationsNotification",
-    modelProperties: {
-      key: {
-        serializedName: "key",
-        nullable: true,
-        type: {
-          name: "String",
+export const BaseResponseUseCasesCategoryGetByIdResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesCategoryGetByIdResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
         },
-      },
-      message: {
-        serializedName: "message",
-        nullable: true,
-        type: {
-          name: "String",
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesCategoryGetByIdResponse",
+          },
         },
       },
     },
-  },
-};
+  };
 
 export const UseCasesCategoryGetByIdResponse: coreClient.CompositeMapper = {
   type: {
@@ -138,6 +230,55 @@ export const UseCasesCategoryGetByIdResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesCourseGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesCourseGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesCourseGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesCourseGetAllResponse: coreClient.CompositeMapper = {
   type: {
@@ -208,6 +349,55 @@ export const UseCasesCourseGetAllResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesCourseGetByCategoryResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesCourseGetByCategoryResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesCourseGetByCategoryResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesCourseGetByCategoryResponse: coreClient.CompositeMapper = {
   type: {
@@ -395,6 +585,55 @@ export const UseCasesCourseGetByIdResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesCourseGetByIAResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesCourseGetByIAResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesCourseGetByIAResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesCourseGetByIAResponse: coreClient.CompositeMapper = {
   type: {
@@ -597,6 +836,55 @@ export const UseCasesCourseGetMostPopularResponse: coreClient.CompositeMapper =
     },
   };
 
+export const BaseResponseListUseCasesIAGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesIAGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesIAGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesIAGetAllResponse: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -626,6 +914,55 @@ export const UseCasesIAGetAllResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesLectureGetAllCourseCompletedResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesLectureGetAllCourseCompletedResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesLectureGetAllCourseCompletedResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesLectureGetAllCourseCompletedResponse: coreClient.CompositeMapper =
   {
@@ -672,6 +1009,49 @@ export const UseCasesLectureGetAllCourseCompletedResponse: coreClient.CompositeM
     },
   };
 
+export const BaseResponseUseCasesLectureGetIsLectureCompletedResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesLectureGetIsLectureCompletedResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesLectureGetIsLectureCompletedResponse",
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesLectureGetIsLectureCompletedResponse: coreClient.CompositeMapper =
   {
     type: {
@@ -682,6 +1062,49 @@ export const UseCasesLectureGetIsLectureCompletedResponse: coreClient.CompositeM
           serializedName: "isCompleted",
           type: {
             name: "Boolean",
+          },
+        },
+      },
+    },
+  };
+
+export const BaseResponseUseCasesModuleGetByIdResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesModuleGetByIdResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesModuleGetByIdResponse",
           },
         },
       },
@@ -723,6 +1146,55 @@ export const UseCasesModuleGetByIdResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesModuleGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesModuleGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesModuleGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesModuleGetAllResponse: coreClient.CompositeMapper = {
   type: {
@@ -789,6 +1261,48 @@ export const UseCasesModuleCreateRequest: coreClient.CompositeMapper = {
   },
 };
 
+export const BaseResponseUseCasesSearchResponse: coreClient.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "BaseResponseUseCasesSearchResponse",
+    modelProperties: {
+      statusCode: {
+        serializedName: "statusCode",
+        type: {
+          name: "Number",
+        },
+      },
+      message: {
+        serializedName: "message",
+        nullable: true,
+        type: {
+          name: "String",
+        },
+      },
+      notifications: {
+        serializedName: "notifications",
+        nullable: true,
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "FluntNotificationsNotification",
+            },
+          },
+        },
+      },
+      response: {
+        serializedName: "response",
+        type: {
+          name: "Composite",
+          className: "UseCasesSearchResponse",
+        },
+      },
+    },
+  },
+};
+
 export const UseCasesSearchResponse: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -839,6 +1353,49 @@ export const UseCasesSearchResponse: coreClient.CompositeMapper = {
   },
 };
 
+export const BaseResponseUseCasesStudentGetByIdResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesStudentGetByIdResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesStudentGetByIdResponse",
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesStudentGetByIdResponse: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -868,6 +1425,55 @@ export const UseCasesStudentGetByIdResponse: coreClient.CompositeMapper = {
   },
 };
 
+export const BaseResponseListUseCasesStudentGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesStudentGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesStudentGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesStudentGetAllResponse: coreClient.CompositeMapper = {
   type: {
     name: "Composite",
@@ -896,6 +1502,49 @@ export const UseCasesStudentGetAllResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseUseCasesStudentGetStudentCourseProgressResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesStudentGetStudentCourseProgressResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesStudentGetStudentCourseProgressResponse",
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesStudentGetStudentCourseProgressResponse: coreClient.CompositeMapper =
   {
@@ -1001,6 +1650,49 @@ export const UseCasesStudentGetLastStudentCourseResponse: coreClient.CompositeMa
     },
   };
 
+export const BaseResponseUseCasesStudentGetStudentModuleProgressResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesStudentGetStudentModuleProgressResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesStudentGetStudentModuleProgressResponse",
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesStudentGetStudentModuleProgressResponse: coreClient.CompositeMapper =
   {
     type: {
@@ -1011,6 +1703,49 @@ export const UseCasesStudentGetStudentModuleProgressResponse: coreClient.Composi
           serializedName: "progressPercentage",
           type: {
             name: "Number",
+          },
+        },
+      },
+    },
+  };
+
+export const BaseResponseUseCasesStudentSubscribeCourseResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesStudentSubscribeCourseResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesStudentSubscribeCourseResponse",
           },
         },
       },
@@ -1053,6 +1788,49 @@ export const UseCasesStudentSubscribeCourseResponse: coreClient.CompositeMapper 
           serializedName: "enrollmentDate",
           type: {
             name: "DateTime",
+          },
+        },
+      },
+    },
+  };
+
+export const BaseResponseUseCasesTeacherGetByIdResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesTeacherGetByIdResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesTeacherGetByIdResponse",
           },
         },
       },
@@ -1115,6 +1893,55 @@ export const UseCasesTeacherGetByIdResponse: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseListUseCasesTeacherGetAllResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseListUseCasesTeacherGetAllResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "UseCasesTeacherGetAllResponse",
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesTeacherGetAllResponse: coreClient.CompositeMapper = {
   type: {
@@ -1195,6 +2022,49 @@ export const UseCasesUserLoginRequest: coreClient.CompositeMapper = {
     },
   },
 };
+
+export const BaseResponseUseCasesUserLoginResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesUserLoginResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesUserLoginResponse",
+          },
+        },
+      },
+    },
+  };
 
 export const UseCasesUserLoginResponse: coreClient.CompositeMapper = {
   type: {

@@ -560,17 +560,7 @@ const getAllCategoriesOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesCategoryGetAllResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesCategoryGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -595,7 +585,7 @@ const getCategoryByIdOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesCategoryGetByIdResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesCategoryGetByIdResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -620,7 +610,7 @@ const createCategoryOperationSpec: coreClient.OperationSpec = {
   httpMethod: "POST",
   responses: {
     201: {
-      bodyMapper: Mappers.UseCasesCategoryGetByIdResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesCategoryGetByIdResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -713,17 +703,7 @@ const getAllCoursesOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesCourseGetAllResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesCourseGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -748,17 +728,7 @@ const getCoursesByCategoryOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesCourseGetByCategoryResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesCourseGetByCategoryResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -807,17 +777,7 @@ const getCoursesByIAOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesCourseGetByIAResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesCourseGetByIAResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -916,14 +876,7 @@ const getAllIAsOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: { name: "Composite", className: "UseCasesIAGetAllResponse" },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesIAGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1028,17 +981,8 @@ const getAllLecturesOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesLectureGetAllCourseCompletedResponse",
-            },
-          },
-        },
-      },
+      bodyMapper:
+        Mappers.BaseResponseListUseCasesLectureGetAllCourseCompletedResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1068,7 +1012,8 @@ const isLectureCompletedOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesLectureGetIsLectureCompletedResponse,
+      bodyMapper:
+        Mappers.BaseResponseUseCasesLectureGetIsLectureCompletedResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1121,7 +1066,7 @@ const getModuleByIdOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesModuleGetByIdResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesModuleGetByIdResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1145,17 +1090,7 @@ const getAllModulesOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesModuleGetAllResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesModuleGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1230,7 +1165,7 @@ const searchItemsOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesSearchResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesSearchResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1255,7 +1190,7 @@ const getStudentByIdOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesStudentGetByIdResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesStudentGetByIdResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1279,17 +1214,7 @@ const getAllStudentsOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesStudentGetAllResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesStudentGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1314,7 +1239,8 @@ const getStudentCourseProgressOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesStudentGetStudentCourseProgressResponse,
+      bodyMapper:
+        Mappers.BaseResponseUseCasesStudentGetStudentCourseProgressResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1365,7 +1291,8 @@ const getStudentModuleProgressOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesStudentGetStudentModuleProgressResponse,
+      bodyMapper:
+        Mappers.BaseResponseUseCasesStudentGetStudentModuleProgressResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1419,7 +1346,7 @@ const subscribeStudentToCourseOperationSpec: coreClient.OperationSpec = {
   httpMethod: "POST",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesStudentSubscribeCourseResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesStudentSubscribeCourseResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1469,7 +1396,7 @@ const getTeacherByIdOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesTeacherGetByIdResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesTeacherGetByIdResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1493,17 +1420,7 @@ const getAllTeachersOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: {
-        type: {
-          name: "Sequence",
-          element: {
-            type: {
-              name: "Composite",
-              className: "UseCasesTeacherGetAllResponse",
-            },
-          },
-        },
-      },
+      bodyMapper: Mappers.BaseResponseListUseCasesTeacherGetAllResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,
@@ -1589,7 +1506,7 @@ const userLoginOperationSpec: coreClient.OperationSpec = {
   httpMethod: "POST",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesUserLoginResponse,
+      bodyMapper: Mappers.BaseResponseUseCasesUserLoginResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,

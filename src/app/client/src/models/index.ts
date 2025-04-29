@@ -1,6 +1,18 @@
 import * as coreClient from "@azure/core-client";
 import * as coreRestPipeline from "@azure/core-rest-pipeline";
 
+export interface BaseResponseListUseCasesCategoryGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesCategoryGetAllResponse[];
+}
+
+export interface FluntNotificationsNotification {
+  key?: string;
+  message?: string;
+}
+
 export interface UseCasesCategoryGetAllResponse {
   categoryId?: string;
   name?: string;
@@ -16,9 +28,11 @@ export interface BaseResponseSystemObject {
   response?: any;
 }
 
-export interface FluntNotificationsNotification {
-  key?: string;
+export interface BaseResponseUseCasesCategoryGetByIdResponse {
+  statusCode?: number;
   message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesCategoryGetByIdResponse;
 }
 
 export interface UseCasesCategoryGetByIdResponse {
@@ -26,6 +40,13 @@ export interface UseCasesCategoryGetByIdResponse {
   name?: string;
   description?: string;
   imageUrl?: string;
+}
+
+export interface BaseResponseListUseCasesCourseGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesCourseGetAllResponse[];
 }
 
 export interface UseCasesCourseGetAllResponse {
@@ -38,6 +59,13 @@ export interface UseCasesCourseGetAllResponse {
   trailerUrl?: string;
   teacherName?: string;
   teacherPictureUrl?: string;
+}
+
+export interface BaseResponseListUseCasesCourseGetByCategoryResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesCourseGetByCategoryResponse[];
 }
 
 export interface UseCasesCourseGetByCategoryResponse {
@@ -69,6 +97,13 @@ export interface UseCasesCourseGetByIdResponse {
   trailerUrl?: string;
   teacherName?: string;
   teacherPictureUrl?: string;
+}
+
+export interface BaseResponseListUseCasesCourseGetByIAResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesCourseGetByIAResponse[];
 }
 
 export interface UseCasesCourseGetByIAResponse {
@@ -103,10 +138,24 @@ export interface UseCasesCourseGetMostPopularResponse {
   teacherPictureUrl?: string;
 }
 
+export interface BaseResponseListUseCasesIAGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesIAGetAllResponse[];
+}
+
 export interface UseCasesIAGetAllResponse {
   id?: string;
   name?: string;
   pictureUrl?: string;
+}
+
+export interface BaseResponseListUseCasesLectureGetAllCourseCompletedResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesLectureGetAllCourseCompletedResponse[];
 }
 
 export interface UseCasesLectureGetAllCourseCompletedResponse {
@@ -117,8 +166,22 @@ export interface UseCasesLectureGetAllCourseCompletedResponse {
   completionDate?: Date;
 }
 
+export interface BaseResponseUseCasesLectureGetIsLectureCompletedResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesLectureGetIsLectureCompletedResponse;
+}
+
 export interface UseCasesLectureGetIsLectureCompletedResponse {
   isCompleted?: boolean;
+}
+
+export interface BaseResponseUseCasesModuleGetByIdResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesModuleGetByIdResponse;
 }
 
 export interface UseCasesModuleGetByIdResponse {
@@ -126,6 +189,13 @@ export interface UseCasesModuleGetByIdResponse {
   name?: string;
   description?: string;
   courseName?: string;
+}
+
+export interface BaseResponseListUseCasesModuleGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesModuleGetAllResponse[];
 }
 
 export interface UseCasesModuleGetAllResponse {
@@ -141,6 +211,13 @@ export interface UseCasesModuleCreateRequest {
   courseId?: string;
 }
 
+export interface BaseResponseUseCasesSearchResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesSearchResponse;
+}
+
 export interface UseCasesSearchResponse {
   type?: string;
   id?: string;
@@ -150,16 +227,37 @@ export interface UseCasesSearchResponse {
   price?: number;
 }
 
+export interface BaseResponseUseCasesStudentGetByIdResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentGetByIdResponse;
+}
+
 export interface UseCasesStudentGetByIdResponse {
   id?: string;
   name?: string;
   pictureUrl?: string;
 }
 
+export interface BaseResponseListUseCasesStudentGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentGetAllResponse[];
+}
+
 export interface UseCasesStudentGetAllResponse {
   id?: string;
   name?: string;
   pictureUrl?: string;
+}
+
+export interface BaseResponseUseCasesStudentGetStudentCourseProgressResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentGetStudentCourseProgressResponse;
 }
 
 export interface UseCasesStudentGetStudentCourseProgressResponse {
@@ -181,8 +279,22 @@ export interface UseCasesStudentGetLastStudentCourseResponse {
   studentId?: string;
 }
 
+export interface BaseResponseUseCasesStudentGetStudentModuleProgressResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentGetStudentModuleProgressResponse;
+}
+
 export interface UseCasesStudentGetStudentModuleProgressResponse {
   progressPercentage?: number;
+}
+
+export interface BaseResponseUseCasesStudentSubscribeCourseResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentSubscribeCourseResponse;
 }
 
 export interface UseCasesStudentSubscribeCourseResponse {
@@ -193,6 +305,13 @@ export interface UseCasesStudentSubscribeCourseResponse {
   enrollmentDate?: Date;
 }
 
+export interface BaseResponseUseCasesTeacherGetByIdResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesTeacherGetByIdResponse;
+}
+
 export interface UseCasesTeacherGetByIdResponse {
   id?: string;
   name?: string;
@@ -201,6 +320,13 @@ export interface UseCasesTeacherGetByIdResponse {
   gitHub?: string;
   description?: string;
   pictureUrl?: string;
+}
+
+export interface BaseResponseListUseCasesTeacherGetAllResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesTeacherGetAllResponse[];
 }
 
 export interface UseCasesTeacherGetAllResponse {
@@ -216,6 +342,13 @@ export interface UseCasesTeacherGetAllResponse {
 export interface UseCasesUserLoginRequest {
   email?: string;
   password?: string;
+}
+
+export interface BaseResponseUseCasesUserLoginResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesUserLoginResponse;
 }
 
 export interface UseCasesUserLoginResponse {
@@ -317,7 +450,8 @@ export interface GetAllCategoriesOptionalParams
 }
 
 /** Contains response data for the getAllCategories operation. */
-export type GetAllCategoriesResponse = UseCasesCategoryGetAllResponse[];
+export type GetAllCategoriesResponse =
+  BaseResponseListUseCasesCategoryGetAllResponse;
 
 /** Optional parameters. */
 export interface GetCategoryByIdOptionalParams
@@ -326,7 +460,8 @@ export interface GetCategoryByIdOptionalParams
 }
 
 /** Contains response data for the getCategoryById operation. */
-export type GetCategoryByIdResponse = UseCasesCategoryGetByIdResponse;
+export type GetCategoryByIdResponse =
+  BaseResponseUseCasesCategoryGetByIdResponse;
 
 /** Optional parameters. */
 export interface CreateCategoryOptionalParams
@@ -337,7 +472,8 @@ export interface CreateCategoryOptionalParams
 }
 
 /** Contains response data for the createCategory operation. */
-export type CreateCategoryResponse = UseCasesCategoryGetByIdResponse;
+export type CreateCategoryResponse =
+  BaseResponseUseCasesCategoryGetByIdResponse;
 
 /** Optional parameters. */
 export interface DeleteCategoryOptionalParams
@@ -377,7 +513,8 @@ export interface GetAllCoursesOptionalParams
 }
 
 /** Contains response data for the getAllCourses operation. */
-export type GetAllCoursesResponse = UseCasesCourseGetAllResponse[];
+export type GetAllCoursesResponse =
+  BaseResponseListUseCasesCourseGetAllResponse;
 
 /** Optional parameters. */
 export interface GetCoursesByCategoryOptionalParams
@@ -389,7 +526,7 @@ export interface GetCoursesByCategoryOptionalParams
 
 /** Contains response data for the getCoursesByCategory operation. */
 export type GetCoursesByCategoryResponse =
-  UseCasesCourseGetByCategoryResponse[];
+  BaseResponseListUseCasesCourseGetByCategoryResponse;
 
 /** Optional parameters. */
 export interface GetCourseByIdOptionalParams
@@ -407,7 +544,8 @@ export interface GetCoursesByIAOptionalParams
 }
 
 /** Contains response data for the getCoursesByIA operation. */
-export type GetCoursesByIAResponse = UseCasesCourseGetByIAResponse[];
+export type GetCoursesByIAResponse =
+  BaseResponseListUseCasesCourseGetByIAResponse;
 
 /** Optional parameters. */
 export interface GetMostPopularCoursesOptionalParams
@@ -442,7 +580,7 @@ export interface GetAllIAsOptionalParams extends coreClient.OperationOptions {
 }
 
 /** Contains response data for the getAllIAs operation. */
-export type GetAllIAsResponse = UseCasesIAGetAllResponse[];
+export type GetAllIAsResponse = BaseResponseListUseCasesIAGetAllResponse;
 
 /** Optional parameters. */
 export interface DeleteIAOptionalParams extends coreClient.OperationOptions {
@@ -478,7 +616,7 @@ export interface GetAllLecturesOptionalParams
 
 /** Contains response data for the getAllLectures operation. */
 export type GetAllLecturesResponse =
-  UseCasesLectureGetAllCourseCompletedResponse[];
+  BaseResponseListUseCasesLectureGetAllCourseCompletedResponse;
 
 /** Optional parameters. */
 export interface IsLectureCompletedOptionalParams
@@ -486,7 +624,7 @@ export interface IsLectureCompletedOptionalParams
 
 /** Contains response data for the isLectureCompleted operation. */
 export type IsLectureCompletedResponse =
-  UseCasesLectureGetIsLectureCompletedResponse;
+  BaseResponseUseCasesLectureGetIsLectureCompletedResponse;
 
 /** Optional parameters. */
 export interface CompleteLectureOptionalParams
@@ -504,14 +642,15 @@ export interface GetModuleByIdOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the getModuleById operation. */
-export type GetModuleByIdResponse = UseCasesModuleGetByIdResponse;
+export type GetModuleByIdResponse = BaseResponseUseCasesModuleGetByIdResponse;
 
 /** Optional parameters. */
 export interface GetAllModulesOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the getAllModules operation. */
-export type GetAllModulesResponse = UseCasesModuleGetAllResponse[];
+export type GetAllModulesResponse =
+  BaseResponseListUseCasesModuleGetAllResponse;
 
 /** Optional parameters. */
 export interface CreateModuleOptionalParams
@@ -539,14 +678,14 @@ export interface SearchItemsOptionalParams extends coreClient.OperationOptions {
 }
 
 /** Contains response data for the searchItems operation. */
-export type SearchItemsResponse = UseCasesSearchResponse;
+export type SearchItemsResponse = BaseResponseUseCasesSearchResponse;
 
 /** Optional parameters. */
 export interface GetStudentByIdOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the getStudentById operation. */
-export type GetStudentByIdResponse = UseCasesStudentGetByIdResponse;
+export type GetStudentByIdResponse = BaseResponseUseCasesStudentGetByIdResponse;
 
 /** Optional parameters. */
 export interface GetAllStudentsOptionalParams
@@ -556,7 +695,8 @@ export interface GetAllStudentsOptionalParams
 }
 
 /** Contains response data for the getAllStudents operation. */
-export type GetAllStudentsResponse = UseCasesStudentGetAllResponse[];
+export type GetAllStudentsResponse =
+  BaseResponseListUseCasesStudentGetAllResponse;
 
 /** Optional parameters. */
 export interface GetStudentCourseProgressOptionalParams
@@ -567,7 +707,7 @@ export interface GetStudentCourseProgressOptionalParams
 
 /** Contains response data for the getStudentCourseProgress operation. */
 export type GetStudentCourseProgressResponse =
-  UseCasesStudentGetStudentCourseProgressResponse;
+  BaseResponseUseCasesStudentGetStudentCourseProgressResponse;
 
 /** Optional parameters. */
 export interface GetLastStudentCourseOptionalParams
@@ -585,7 +725,7 @@ export interface GetStudentModuleProgressOptionalParams
 
 /** Contains response data for the getStudentModuleProgress operation. */
 export type GetStudentModuleProgressResponse =
-  UseCasesStudentGetStudentModuleProgressResponse;
+  BaseResponseUseCasesStudentGetStudentModuleProgressResponse;
 
 /** Optional parameters. */
 export interface CreateStudentOptionalParams
@@ -608,7 +748,7 @@ export interface SubscribeStudentToCourseOptionalParams
 
 /** Contains response data for the subscribeStudentToCourse operation. */
 export type SubscribeStudentToCourseResponse =
-  UseCasesStudentSubscribeCourseResponse;
+  BaseResponseUseCasesStudentSubscribeCourseResponse;
 
 /** Optional parameters. */
 export interface DeleteStudentOptionalParams
@@ -624,14 +764,15 @@ export interface GetTeacherByIdOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the getTeacherById operation. */
-export type GetTeacherByIdResponse = UseCasesTeacherGetByIdResponse;
+export type GetTeacherByIdResponse = BaseResponseUseCasesTeacherGetByIdResponse;
 
 /** Optional parameters. */
 export interface GetAllTeachersOptionalParams
   extends coreClient.OperationOptions {}
 
 /** Contains response data for the getAllTeachers operation. */
-export type GetAllTeachersResponse = UseCasesTeacherGetAllResponse[];
+export type GetAllTeachersResponse =
+  BaseResponseListUseCasesTeacherGetAllResponse;
 
 /** Optional parameters. */
 export interface CreateTeacherOptionalParams
@@ -667,7 +808,7 @@ export interface UserLoginOptionalParams extends coreClient.OperationOptions {
 }
 
 /** Contains response data for the userLogin operation. */
-export type UserLoginResponse = UseCasesUserLoginResponse;
+export type UserLoginResponse = BaseResponseUseCasesUserLoginResponse;
 
 /** Optional parameters. */
 export interface UserRegisterOptionalParams
