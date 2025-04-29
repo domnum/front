@@ -166,10 +166,19 @@ export interface UseCasesStudentGetStudentCourseProgressResponse {
   progressPercentage?: number;
 }
 
+export interface BaseResponseUseCasesStudentGetLastStudentCourseResponse {
+  statusCode?: number;
+  message?: string;
+  notifications?: FluntNotificationsNotification[];
+  response?: UseCasesStudentGetLastStudentCourseResponse;
+}
+
 export interface UseCasesStudentGetLastStudentCourseResponse {
   courseId?: string;
   courseName?: string;
-  enrollmentDate?: Date;
+  description?: string;
+  imageUrl?: string;
+  studentId?: string;
 }
 
 export interface UseCasesStudentGetStudentModuleProgressResponse {
@@ -568,7 +577,7 @@ export interface GetLastStudentCourseOptionalParams
 
 /** Contains response data for the getLastStudentCourse operation. */
 export type GetLastStudentCourseResponse =
-  UseCasesStudentGetLastStudentCourseResponse;
+  BaseResponseUseCasesStudentGetLastStudentCourseResponse;
 
 /** Optional parameters. */
 export interface GetStudentModuleProgressOptionalParams

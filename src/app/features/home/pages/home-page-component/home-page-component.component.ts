@@ -1,11 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CourseProgressCardComponent } from '../../../../shared/components/course-progress/course-progress-card.component';
 import { HomePageService } from '../../services/home-page.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-home-page-component',
   standalone: true,
-  imports: [CourseProgressCardComponent],
+  imports: [CommonModule,CourseProgressCardComponent],
   templateUrl: './home-page-component.component.html',
   styleUrls: ['./home-page-component.component.css']
 })
@@ -24,7 +26,7 @@ export class HomePageComponent implements OnInit {
   private async loadCourseData(): Promise<void> {
     try {
       const courseData = await this.homepageService.getCourse();
-      this.course = courseData ? courseData : null;
+      this.course = courseData.response ? courseData.response : null;
 
       if (this.course && this.course.courseId) {
         const progressData = await this.homepageService.getProgress(this.course.courseId,

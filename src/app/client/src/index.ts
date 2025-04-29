@@ -1,2 +1,2 @@
-export * from "./models";
-export { Presentation } from "./presentation";
+export * from "./models/index.js";
+export { Presentation } from "./presentation.js";

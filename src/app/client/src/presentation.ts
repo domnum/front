@@ -1,8 +1,8 @@
 import * as coreClient from "@azure/core-client";
 import * as coreRestPipeline from "@azure/core-rest-pipeline";
 import * as coreAuth from "@azure/core-auth";
-import * as Parameters from "./models/parameters";
-import * as Mappers from "./models/mappers";
+import * as Parameters from "./models/parameters.js";
+import * as Mappers from "./models/mappers.js";
 import {
   PresentationOptionalParams,
   GetAllCategoriesOptionalParams,
@@ -89,7 +89,7 @@ import {
   UserResendCodeResponse,
   UserForgotPasswordActivateOptionalParams,
   UserForgotPasswordActivateResponse,
-} from "./models";
+} from "./models/index.js";
 
 export class Presentation extends coreClient.ServiceClient {
   $host: string;
@@ -1339,7 +1339,8 @@ const getLastStudentCourseOperationSpec: coreClient.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.UseCasesStudentGetLastStudentCourseResponse,
+      bodyMapper:
+        Mappers.BaseResponseUseCasesStudentGetLastStudentCourseResponse,
     },
     400: {
       bodyMapper: Mappers.BaseResponseSystemObject,

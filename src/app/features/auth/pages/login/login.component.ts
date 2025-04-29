@@ -8,16 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common'; 
 import { RouterModule, Router } from '@angular/router';
-import { finalize, from } from 'rxjs';
 import { FormBuilderComponent, FormField } from '../../../../shared/components/form-builder/form-builder.component';
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
 import { BaseComponent } from '../../../../shared/base/base.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ThemeService } from '../../../../core/services/theme.service';
-import { Presentation } from '../../../../client/src';
 import { TokenService } from '../../../../client/token.service';
 import { AuthService } from '../../services/auth.service';
 import { environment } from '../../../../../environments/environment';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-login',
@@ -69,11 +67,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
         private authService: AuthService,
         private tokenService: TokenService,
         protected override router: Router,
-        protected override snackBar: MatSnackBar,
+        protected override messageService: MessageService,
         @Inject(PLATFORM_ID) protected override platformId: Object,
         @Inject(ThemeService) protected override themeService: ThemeService
     ) {
-        super(snackBar, router, platformId, themeService);
+        super(messageService, router, platformId, themeService);
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]]
@@ -90,11 +88,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     onLogin(): void {
         if (this.loginForm.valid) {
           this.loading = true;
-      
           this.authService.getPresentation() 
             .then(async (presentation) => {
               const loginData = this.loginForm.value;
-      
               const response = await fetch(`${environment.BACKEND_URL}/User/Login`, {
                 method: 'POST',
                 headers: {
@@ -111,11 +107,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
       
                 this.router.navigate(['/home']);
               } else {
-                this.showMessage('Login falhou: Token não recebido.', 'error');
+                this.showMessage(response, 'error');
               }
             })
             .catch((error) => {
-              this.showMessage(error.message || 'Erro ao realizar login.', 'error');
+              this.showMessage(error || 'Erro ao realizar login.', 'error');
             })
             .finally(() => {
               this.loading = false;

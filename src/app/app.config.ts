@@ -10,6 +10,7 @@ import MeuPreset from './themes/MeuPreset.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TokenService } from './client/token.service';
 import { AuthService } from './features/auth/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     TokenService,
     AuthService,
+    MessageService,
   ]
 };

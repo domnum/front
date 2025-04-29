@@ -15,12 +15,12 @@ export class ThemeToggleComponent extends BaseComponent {
   @Output() valueChange = new EventEmitter<boolean>();
 
   constructor(@Inject(ThemeService) themeService: ThemeService) {
-    super();
+    super(undefined, undefined, 'browser', themeService); 
   }
 
   onToggleClick() {
-    this.toggleTheme(); 
-    this.value = !this.value;
+    const isDark = this.toggleTheme(); 
+    this.value = isDark;
     this.valueChange.emit(this.value);
   }
 }

@@ -26,7 +26,7 @@
           
             <ng-template pTemplate="end">
               <div class="flex items-center">
-                <app-theme-toggle [(value)]="isDarkTheme" class="ml-4" />
+                <app-theme-toggle [value]="isDarkTheme" (valueChange)="toggleTheme()" />
               </div>
             </ng-template>
           </p-menubar>

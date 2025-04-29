@@ -2244,7 +2244,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UseCases_Student_GetLastStudentCourse_Response"
+                  "$ref": "#/components/schemas/BaseResponse_UseCases_Student_GetLastStudentCourse_Response"
                 }
               }
             }
@@ -3428,6 +3428,30 @@
         },
         "additionalProperties": false
       },
+      "BaseResponse_UseCases_Student_GetLastStudentCourse_Response": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Flunt_Notifications_Notification"
+            },
+            "nullable": true
+          },
+          "response": {
+            "$ref": "#/components/schemas/UseCases_Student_GetLastStudentCourse_Response"
+          }
+        },
+        "additionalProperties": false
+      },
       "Flunt_Notifications_Notification": {
         "type": "object",
         "properties": {
@@ -3900,15 +3924,25 @@
         "properties": {
           "courseId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "courseName": {
             "type": "string",
             "nullable": true
           },
-          "enrollmentDate": {
+          "description": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "studentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false

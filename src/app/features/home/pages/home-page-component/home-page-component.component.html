@@ -14,8 +14,8 @@
       <div class="mt-6 max-w-md" *ngIf="course">
         <app-course-progress-card
           [image]="course.imageUrl"
-          [title]="course.name"
-          [progress]="progress">
+          [title]="course.courseName"
+          [progress]="this.progress">
         </app-course-progress-card>
       </div>
     </div>

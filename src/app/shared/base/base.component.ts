@@ -1,13 +1,12 @@
-import { isPlatformBrowser } from '@angular/common';
 import { Directive, Inject, PLATFORM_ID } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, NavigationExtras } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
+import { MessageService } from 'primeng/api'; 
 
 @Directive()
 export abstract class BaseComponent {
   constructor(
-    protected snackBar?: MatSnackBar,
+    protected messageService?: MessageService, 
     protected router?: Router,
     @Inject(PLATFORM_ID) protected platformId: Object = 'browser',
     protected themeService?: ThemeService
@@ -20,8 +19,8 @@ export abstract class BaseComponent {
     return this.themeService?.isDarkMode() ?? false;
   }
 
-  public toggleTheme(): void {
-    const isNowDark = this.themeService?.toggleTheme();
+  public toggleTheme(): boolean {
+    return this.themeService?.toggleTheme() ?? false;
   }
 
   protected navigateTo(route: string) {
@@ -32,8 +31,8 @@ export abstract class BaseComponent {
     this.router?.navigate([route], queryParams);
   }
 
-  showMessage(response: any, type?: 'success' | 'error' | 'warning') {
-    if (!this.snackBar) return;
+  showMessage(response: any, type: 'success' | 'error' | 'warn' | 'info' = 'info') {
+    if (!this.messageService) return;
 
     let message = '';
 
@@ -45,11 +44,26 @@ export abstract class BaseComponent {
       message = response?.message ?? 'Ocorreu um erro inesperado.';
     }
 
-    this.snackBar.open(message, 'Fechar', {
-      duration: 3000,
-      panelClass: type ? [`snackbar-${type}`] : [],
-      verticalPosition: 'top',
-      horizontalPosition: 'center'
+    this.messageService.add({
+      severity: type,
+      summary: this.getSummaryByType(type),
+      detail: message,
+      life: 3000, 
+      styleClass: 'custom-toast-animation' 
     });
+  }
+
+  private getSummaryByType(type: 'success' | 'error' | 'warn' | 'info'): string {
+    switch (type) {
+      case 'success':
+        return 'Sucesso';
+      case 'error':
+        return 'Erro';
+      case 'warn':
+        return 'Atenção';
+      case 'info':
+      default:
+        return 'Informação';
+    }
   }
 }

@@ -10,7 +10,7 @@ import {
   UseCasesUserForgotPasswordRequest as UseCasesUserForgotPasswordRequestMapper,
   UseCasesUserResendCodeRequest as UseCasesUserResendCodeRequestMapper,
   UseCasesUserForgotPasswordActivateRequest as UseCasesUserForgotPasswordActivateRequestMapper,
-} from "../models/mappers";
+} from "../models/mappers.js";
 
 export const accept: OperationParameter = {
   parameterPath: "accept",

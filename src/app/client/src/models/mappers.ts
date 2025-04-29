@@ -913,6 +913,49 @@ export const UseCasesStudentGetStudentCourseProgressResponse: coreClient.Composi
     },
   };
 
+export const BaseResponseUseCasesStudentGetLastStudentCourseResponse: coreClient.CompositeMapper =
+  {
+    type: {
+      name: "Composite",
+      className: "BaseResponseUseCasesStudentGetLastStudentCourseResponse",
+      modelProperties: {
+        statusCode: {
+          serializedName: "statusCode",
+          type: {
+            name: "Number",
+          },
+        },
+        message: {
+          serializedName: "message",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        notifications: {
+          serializedName: "notifications",
+          nullable: true,
+          type: {
+            name: "Sequence",
+            element: {
+              type: {
+                name: "Composite",
+                className: "FluntNotificationsNotification",
+              },
+            },
+          },
+        },
+        response: {
+          serializedName: "response",
+          type: {
+            name: "Composite",
+            className: "UseCasesStudentGetLastStudentCourseResponse",
+          },
+        },
+      },
+    },
+  };
+
 export const UseCasesStudentGetLastStudentCourseResponse: coreClient.CompositeMapper =
   {
     type: {
@@ -921,6 +964,7 @@ export const UseCasesStudentGetLastStudentCourseResponse: coreClient.CompositeMa
       modelProperties: {
         courseId: {
           serializedName: "courseId",
+          nullable: true,
           type: {
             name: "Uuid",
           },
@@ -932,10 +976,25 @@ export const UseCasesStudentGetLastStudentCourseResponse: coreClient.CompositeMa
             name: "String",
           },
         },
-        enrollmentDate: {
-          serializedName: "enrollmentDate",
+        description: {
+          serializedName: "description",
+          nullable: true,
           type: {
-            name: "DateTime",
+            name: "String",
+          },
+        },
+        imageUrl: {
+          serializedName: "imageUrl",
+          nullable: true,
+          type: {
+            name: "String",
+          },
+        },
+        studentId: {
+          serializedName: "studentId",
+          nullable: true,
+          type: {
+            name: "Uuid",
           },
         },
       },
