@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -15,6 +15,8 @@ import { LogoComponent } from '../../../../shared/components/logo/logo.component
 import { FooterComponent } from '../../../../shared/components/footer/footer/footer.component';
 import { ThemeToggleComponent } from '../../../../shared/components/theme-toggle/theme-toggle.component';
 import { BaseComponent } from '../../../../shared/base/base.component';
+import { HomePageService } from '../../services/home-page.service';
+import { GetStudentByIdResponse } from '../../../../client/src';
 
 @Component({
   selector: 'app-home-layout-component',
@@ -34,9 +36,18 @@ import { BaseComponent } from '../../../../shared/base/base.component';
   templateUrl: './home-layout-component.component.html',
   styleUrl: './home-layout-component.component.css'
 })
-export class HomeLayoutComponent extends BaseComponent {
-  constructor() {
+export class HomeLayoutComponent extends BaseComponent
+implements OnInit {
+
+  protected pictureStudent: string | '' = '';
+  constructor(
+    private homepageService: HomePageService,
+  ) {
     super();
+  }
+  async ngOnInit(): Promise<void> {
+    this.pictureStudent = (await this.homepageService.
+      GetStudentDetails()).response?.pictureUrl || '';
   }
 
   value1: string = "";
@@ -104,7 +115,6 @@ export class HomeLayoutComponent extends BaseComponent {
       ]
     },
   ];
-
   onAvatarClick() {
     throw new Error('Method not implemented.');
   }

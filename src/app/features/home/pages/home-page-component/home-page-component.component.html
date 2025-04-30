@@ -2,17 +2,21 @@
   <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12">
     <div class="flex-1 text-center lg:text-left">
       <h2 class="text-4xl font-bold text-gray-900" style="color: var(--p-inputtext-color);">
-        <span style="color: var(--p-inputtext-color);">Olá, Kauê?</span> O que vamos aprender hoje?
+        <span style="color: var(--p-inputtext-color);">
+          [{{ mensagemBoasVindas}}] <br />
+        </span> O que vamos aprender hoje?
       </h2>
 
       <ul class="mt-6 space-y-2 text-left text-gray-700">
         <h4 class="text-2xl font-bold text-gray-900">
-          <span style="color: var(--p-inputtext-color);">Continue Assitindo!</span>
+          <span style="color: var(--p-inputtext-color);"> 
+            [{{mensagemBoasVindas2}}]</span>
         </h4>
       </ul>
 
       <div class="mt-6 max-w-md" *ngIf="course">
         <app-course-progress-card
+          [disabled]="this.disableProgressBar"
           [image]="course.imageUrl"
           [title]="course.courseName"
           [progress]="this.progress">

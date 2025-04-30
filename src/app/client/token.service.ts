@@ -76,4 +76,12 @@ export class TokenService {
     const payload = this.decodeToken(token);
     return payload?.StudentId || null;
   }
+
+  getStudentName(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = this.decodeToken(token);
+    return payload?.Name || null;
+  }
 }

@@ -17,7 +17,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
         <h3 class="text-lg font-semibold truncate">{{ title }}</h3>
 
         <div class="mt-4">
-          <p-progressBar [value]="progress" class="h-3 rounded-full"></p-progressBar>
+          <p-progressBar [value]="progress" 
+          [ariaDisabled]="this.disabled" class="h-3 rounded-full"></p-progressBar>
         </div>
       </div>
     </p-card>
@@ -28,4 +29,5 @@ export class CourseProgressCardComponent {
   @Input() image: string = '';
   @Input() title: string = 'Curso sem nome';
   @Input() progress: number = 0;
+  @Input() disabled: boolean = false;
 }

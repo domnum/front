@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GetLastStudentCourseResponse, GetStudentByIdResponse, GetStudentCourseProgressResponse, Presentation } 
+import { GetLastStudentCourseResponse, GetMostPopularCoursesResponse, GetStudentByIdResponse, GetStudentCourseProgressResponse, Presentation, UseCasesCourseGetMostPopularResponse } 
   from '../../../client/src';
 import { TokenService } from '../../../client/token.service';
 import { AuthService } from '../../auth/services/auth.service'; 
@@ -10,12 +10,15 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HomePageService {
   private studentId: string | null = null; 
   private presentationClient: Presentation | null = null;
+  public studentName: string | null = null;
+  disableProgressBar = false; 
 
   constructor(
     private authService: AuthService,
     private tokenService: TokenService
   ) {
     this.studentId = this.tokenService.getStudentId();
+    this.studentName = this.tokenService.getStudentName();
     if (!this.studentId) {
       throw new Error('StudentId is required');
     }
@@ -50,18 +53,23 @@ export class HomePageService {
     if (!studentId || !courseId) {
       throw new Error('StudentId or CourseId is required');
     }
-
     await this.ensurePresentationClientInitialized();
     const options = { studentId, courseId };
     return this.presentationClient!.getStudentCourseProgress(options);
   }
 
-  async GetPictureStudent(studentId: string): Promise<GetStudentByIdResponse> {
-    if (!studentId) {
+  async GetStudentDetails()
+  : Promise<GetStudentByIdResponse> {
+    if (!this.studentId) {
       throw new Error('StudentId is required');
     }
-
     await this.ensurePresentationClientInitialized();
-    return this.presentationClient!.getStudentById(studentId);
+    return this.presentationClient!.getStudentById(this.studentId);
+  }
+  
+  async GetFiveCoursesMostPopular(): Promise<UseCasesCourseGetMostPopularResponse[]> {
+    await this.ensurePresentationClientInitialized();
+    const result = await this.presentationClient!.getMostPopularCourses();
+    return result.response ?? [];
   }
 }
