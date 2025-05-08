@@ -14,7 +14,6 @@ import { BaseComponent } from '../../../../shared/base/base.component';
 import { ThemeService } from '../../../../core/services/theme.service';
 import { TokenService } from '../../../../client/token.service';
 import { AuthService } from '../../services/auth.service';
-import { environment } from '../../../../../environments/environment';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -87,35 +86,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     }
     onLogin(): void {
         if (this.loginForm.valid) {
-          this.loading = true;
-          this.authService.getPresentation() 
-            .then(async (presentation) => {
-              const loginData = this.loginForm.value;
-              const response = await fetch(`${environment.BACKEND_URL}/User/Login`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-API-KEY': environment.API_KEY,
-                },
-                body: JSON.stringify(loginData),
-              }).then((res) => res.json());
-      
-              if (response?.token) {
-                this.tokenService.setToken(response.token);
-                this.authService.resetPresentation();
-                await this.authService.getPresentation(); 
-      
-                this.router.navigate(['/home']);
-              } else {
-                this.showMessage(response, 'error');
-              }
-            })
-            .catch((error) => {
-              this.showMessage(error || 'Erro ao realizar login.', 'error');
-            })
-            .finally(() => {
-              this.loading = false;
-            });
+          
         }
       }
 }

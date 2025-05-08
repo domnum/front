@@ -1,12 +1,13 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { InputComponent } from '../input/input.component';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
+import { RouterModule } from '@angular/router';
+import { InputComponent } from '../input/input.component';
 
 export interface FormField {
   name: string;
@@ -33,10 +34,18 @@ export interface FormField {
     InputComponent,
     CardModule,
     ButtonModule,
-    PasswordModule
+    PasswordModule,
+    RouterModule
   ],
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+    <h2
+      *ngIf="title"
+      [ngStyle]="{ color: 'var(--p-primary-400)' }"
+      class="text-xl font-semibold text-center mb-4"
+    >
+      {{ title }}
+    </h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container mb-6">
       <ng-container *ngFor="let field of fields">
         <div class="field-container">
           <ng-container [ngSwitch]="field.type">
@@ -72,19 +81,25 @@ export interface FormField {
       </ng-container>
 
       <div class="button-container">
-      <button 
-        pButton 
-        type="submit" 
-        [disabled]="form.invalid || isLoading" 
-        class="loading-button">
-        <ng-container *ngIf="!isLoading; else loadingTemplate">
-          {{ submitButtonLabel }}
-        </ng-container>
-        <ng-template #loadingTemplate>
-          <i class="pi pi-spin pi-spinner"></i>
-        </ng-template>
-      </button>
-    </div>
+        <button 
+          pButton 
+          type="submit" 
+          [disabled]="form.invalid || isLoading" 
+          class="loading-button">
+          <ng-container *ngIf="!isLoading; else loadingTemplate">
+            {{ submitButtonLabel }}
+          </ng-container>
+          <ng-template #loadingTemplate>
+            <i class="pi pi-spin pi-spinner"></i>
+          </ng-template>
+        </button>
+
+        <div class="extra-links" *ngIf="routersLinks.length">
+          <a *ngFor="let link of routersLinks" [routerLink]="link.routerLink">
+            {{ link.label }}
+          </a>
+        </div>
+      </div>
     </form>
   `,
   styles: [`
@@ -102,7 +117,7 @@ export interface FormField {
     }
 
     .field-label {
-      color: #fff;
+      color: var(--p-primary-400);
       font-size: 0.875rem;
       font-weight: 500;
     }
@@ -163,31 +178,55 @@ export interface FormField {
     .button-container {
       margin-top: 1rem;
       width: 100%;
+      position: relative;
     }
 
     button {
       width: 100%;
     }
+    .extra-links {
+        display: flex;
+        justify-content: center; 
+        margin-top: 0.75rem;
+        gap: 1rem;
+      }
+
+      .extra-links:has(a:first-child + a) {
+        justify-content: space-between;
+      }
+
+      .extra-links a {
+        font-size: 0.875rem;
+        color: var(--p-primary-400);
+        text-decoration: none;
+      }
+
+      .extra-links a:hover {
+        text-decoration: underline;
+      }
   `],
   providers: [provideNgxMask()]
 })
 export class FormBuilderComponent implements OnInit {
+  @Input() title: string = '';
   @Input() fields: FormField[] = [];
   @Input() form!: FormGroup;
   @Input() submitButtonLabel: string = 'Enviar';
+  @Input() routersLinks: { label: string; routerLink: string }[] = [];
 
   @Output() formSubmit = new EventEmitter<any>();
 
-  isLoading: boolean = false; 
+  isLoading: boolean = false;
+
   ngOnInit() {}
 
   onSubmit() {
     if (this.form.valid) {
-      this.isLoading = true; 
+      this.isLoading = true;
       this.formSubmit.emit(this.form.value);
 
       setTimeout(() => {
-        this.isLoading = false; 
+        this.isLoading = false;
       }, 1000);
     }
   }

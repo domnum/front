@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HomeLayoutComponent } from './home-layout-component.component';
 
-import { HomeLayoutComponentComponent } from './home-layout-component.component';
 
 describe('HomeLayoutComponentComponent', () => {
-  let component: HomeLayoutComponentComponent;
-  let fixture: ComponentFixture<HomeLayoutComponentComponent>;
+  let component: HomeLayoutComponent;
+  let fixture: ComponentFixture<HomeLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeLayoutComponentComponent]
+      imports: [HomeLayoutComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeLayoutComponentComponent);
+    fixture = TestBed.createComponent(HomeLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

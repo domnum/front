@@ -38,7 +38,7 @@ import { NgxMaskDirective } from 'ngx-mask';
     }
 
     .input-label {
-      color: #fff;
+      color: var(--p-inputtext-color);
       font-size: 0.875rem;
       font-weight: 500;
     }

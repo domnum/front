@@ -9,14 +9,11 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
-
-// Componentes da aplicação
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
 import { FooterComponent } from '../../../../shared/components/footer/footer/footer.component';
 import { ThemeToggleComponent } from '../../../../shared/components/theme-toggle/theme-toggle.component';
 import { BaseComponent } from '../../../../shared/base/base.component';
 import { HomePageService } from '../../services/home-page.service';
-import { GetStudentByIdResponse } from '../../../../client/src';
 
 @Component({
   selector: 'app-home-layout-component',

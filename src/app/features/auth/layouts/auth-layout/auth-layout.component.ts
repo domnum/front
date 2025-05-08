@@ -12,26 +12,42 @@ import { ThemeToggleComponent } from "../../../../shared/components/theme-toggle
       <div class="absolute top-4 right-4">
         <app-theme-toggle />
       </div>
-      
-      <div class="flex-1 flex items-center justify-center p-4">
-        <router-outlet></router-outlet>
+
+      <div class="auth-scroll-wrapper overflow-y-auto flex justify-center p-4 pb-20 mb-12">
+        <div class="auth-content w-full max-w-[500px]">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   `,
   styles: [`
     :host {
       display: block;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .auth-layout-container {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       background: var(--background-gradient);
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
+    }
+
+    .auth-scroll-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .auth-content {
+      width: 100%;
+      max-width: 430px; 
     }
   `]
 })

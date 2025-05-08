@@ -5,14 +5,13 @@
                 <div class="flex justify-center mb-4">
                     <app-logo />
                 </div>
-                <span class="text-muted-color font-medium">Faça login para continuar</span>
             </div>
-
             <app-form-builder
                 [fields]="loginFields"
                 [form]="loginForm"
                 [submitButtonLabel]="'Entrar'"
-                (formSubmit)="onLogin()">
+                (formSubmit)="onLogin()"
+                [title]="'Faça login para continuar'">
             </app-form-builder>
 
             <div class="flex items-center justify-between mt-4 w-full">
