@@ -183,6 +183,7 @@ export interface FormField {
 
     button {
       width: 100%;
+      color: var(--p-primary-900);
     }
     .extra-links {
         display: flex;

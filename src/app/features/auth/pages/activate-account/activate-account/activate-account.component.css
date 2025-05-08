@@ -1,0 +1,15 @@
+.activation-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .success-icon {
+    font-size: 3rem;
+    color: green;
+  }
+  
+  .error-icon {
+    font-size: 3rem;
+    color: red;
+  }
+  

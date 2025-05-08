@@ -109,4 +109,23 @@ export class AuthService extends BaseComponent{
       this.showMessage(error, 'error');
     }
   }
+
+  async activateAccount(email: string, token: string): Promise<any> {
+    try {
+      const response = await fetch(`${environment.BACKEND_URL}/User/Activate-Account`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': environment.API_KEY,
+        },
+        body: JSON.stringify({ email, token }),
+      });
+      if (!response.ok) {
+        this.showMessage(response, 'error');
+      }
+      this.showMessage(response, 'success');
+    } catch (error: any) {
+      this.showMessage(error, 'error');
+    }
+  }
 }
