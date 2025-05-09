@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -7,14 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common'; 
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormBuilderComponent, FormField } from '../../../../shared/components/form-builder/form-builder.component';
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
 import { BaseComponent } from '../../../../shared/base/base.component';
-import { ThemeService } from '../../../../core/services/theme.service';
 import { TokenService } from '../../../../client/token.service';
 import { AuthService } from '../../services/auth.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-login',
@@ -64,13 +62,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private tokenService: TokenService,
-        protected override router: Router,
-        protected override messageService: MessageService,
-        @Inject(PLATFORM_ID) protected override platformId: Object,
-        @Inject(ThemeService) protected override themeService: ThemeService
+        private tokenService: TokenService
     ) {
-        super(messageService, router, platformId, themeService);
+        super();
         this.loginForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]]
@@ -84,9 +78,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
             }
         });
     }
-    onLogin(): void {
+    async onLogin(): Promise<void> {
         if (this.loginForm.valid) {
-          
+          await this.authService.login(this.loginForm.value);
         }
+        this.loading = false;
       }
 }

@@ -41,7 +41,8 @@ export class ForgotPasswordComponent extends BaseComponent {
   ];
 
   routersLinks = [
-    { label: 'Cadastre-se', routerLink: '/auth/register' }
+    { label: 'Cadastre-se', routerLink: '/auth/register' },
+    { label: 'Voltar para Login', routerLink: '/auth/login' },
   ];
   
   constructor(

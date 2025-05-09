@@ -17,11 +17,15 @@ export const AUTH_ROUTES: Routes = [
       },
       {
         path: 'register',
-        loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
+          loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
       },
       {
         path: 'forgot-password',
         loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+      },
+      {
+        path: 'activate-account',
+        loadComponent: () => import('./activate-account/activate-account.component').then(m => m.ActivateAccountComponent)
       },
     ]
   }

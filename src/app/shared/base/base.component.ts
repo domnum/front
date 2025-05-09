@@ -1,16 +1,16 @@
-import { Directive, Inject, PLATFORM_ID } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Directive, inject, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
 import { MessageService } from 'primeng/api'; 
 
 @Directive()
 export abstract class BaseComponent {
-  constructor(
-    protected messageService?: MessageService, 
-    protected router?: Router,
-    @Inject(PLATFORM_ID) protected platformId: Object = 'browser',
-    protected themeService?: ThemeService
-  ) {
+  protected messageService = inject(MessageService);
+  protected router = inject(Router);
+  protected platformId = inject(PLATFORM_ID);
+  protected themeService = inject(ThemeService);
+
+  constructor() {
     // Aplica o tema salvo no load
     this.themeService?.applyInitialTheme();
   }
@@ -27,7 +27,7 @@ export abstract class BaseComponent {
     this.router?.navigate([route]);
   }
 
-  protected navigateToWithParams(route: string, queryParams: NavigationExtras) {
+  protected navigateToWithParams(route: string, queryParams: any) {
     this.router?.navigate([route], queryParams);
   }
 

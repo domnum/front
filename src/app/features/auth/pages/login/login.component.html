@@ -1,23 +1,21 @@
-<div class="back-ground">
-    <div class="flex flex-col items-center justify-center w-full max-w-md mx-auto px-4">
-        <div class="w-full">
-            <div class="text-center mb-8">
-                <div class="flex justify-center mb-4">
-                    <app-logo />
-                </div>
-            </div>
-            <app-form-builder
-                [fields]="loginFields"
-                [form]="loginForm"
-                [submitButtonLabel]="'Entrar'"
-                (formSubmit)="onLogin()"
-                [title]="'Faça login para continuar'">
-            </app-form-builder>
-
-            <div class="flex items-center justify-between mt-4 w-full">
-                <a [routerLink]="['/auth/forgot-password']" class="text-sm">Esqueceu sua senha?</a>
-                <a [routerLink]="['/auth/register']" class="text-sm">Cadastre-se</a>
-            </div>
+<div class="px-4 pt-10">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="flex justify-center mb-4">
+          <app-logo />
         </div>
+      </div>
+      <app-form-builder
+        [fields]="loginFields"
+        [form]="loginForm"
+        [submitButtonLabel]="'Entrar'"
+        (formSubmit)="onLogin()"
+        [title]="'Faça login para continuar'">
+      </app-form-builder>
+  
+      <div class="flex items-center justify-between mt-4 w-full">
+        <a [routerLink]="['/auth/forgot-password']" class="text-sm">Esqueceu sua senha?</a>
+        <a [routerLink]="['/auth/register']" class="text-sm">Cadastre-se</a>
+      </div>
     </div>
 </div>

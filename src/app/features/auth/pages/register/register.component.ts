@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';
 import { CommonModule } from '@angular/common';
@@ -113,14 +113,10 @@ export class RegisterComponent extends BaseComponent {
   ];
 
   constructor(
-      private fb: FormBuilder,
-      private authService: AuthService,
-      protected override router: Router,
-      protected override messageService: MessageService,
-      @Inject(PLATFORM_ID) protected override platformId: Object,
-      @Inject(ThemeService) protected override themeService: ThemeService
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
-    super(messageService, router, platformId, themeService);
+    super();
     this.registerForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]]

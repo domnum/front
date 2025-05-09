@@ -1,17 +1,26 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { Presentation } from '../../../client/src';
 import { TokenService } from '../../../client/token.service';
 import { environment } from '../../../../environments/environment';
 import { BaseComponent } from '../../../shared/base/base.component';
+import { Presentation } from '../../../client/src';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, delay } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends BaseComponent{
+export class AuthService extends BaseComponent {
   private _presentation: Presentation | null = null;
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-API-KEY': environment.API_KEY,
+  });
 
   constructor(
     private tokenService: TokenService,
+    private http: HttpClient,
   ) {
     super();
   }
@@ -39,93 +48,66 @@ export class AuthService extends BaseComponent{
     this._presentation = null;
   }
 
-  async login(form: { email: string; senha: string }): Promise<void> {
-    try {
-      const response = await fetch(`${environment.BACKEND_URL}/User/Login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': environment.API_KEY,
-        },
-        body: JSON.stringify(form),
-      }).then(res => res.json());
-
-      if (response?.token) {
-        this.tokenService.setToken(response.token);
-        this.resetPresentation();
-        await this.getPresentation();
-        this.navigateTo('/home');
-      } else {
-        this.showMessage(response?.message || 'Erro ao realizar login.', 'error');
-      }
-    } catch (error) {
-      this.showMessage('Erro ao realizar login.', 'error');
-    }
-  }
-  
-  async register(formData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    password: string;
-    confirmPassword: string;
-  }): Promise<any> {
-    try {
-      const response = await fetch(`${environment.BACKEND_URL}/User/Register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': environment.API_KEY,
-        },
-        body: JSON.stringify(formData),
+  login(form: { email: string; senha: string }): void {
+    this.http
+      .post<any>(`${environment.BACKEND_URL}/User/Login`, form, { headers: this.headers })
+      .pipe(
+        catchError(err => {
+          this.showMessage('Erro ao realizar login.', 'error');
+          return of(null);
+        })
+      )
+      .subscribe(async response => {
+        if (response?.token) {
+          this.tokenService.setToken(response.token);
+          this.resetPresentation();
+          await this.getPresentation();
+          this.navigateTo('/home');
+        } else {
+          this.showMessage(response?.message || 'Erro ao realizar login.', 'error');
+        }
       });
-      if (!response.ok) {
-        this.showMessage(response, 'error');
-      }
-      this.showMessage(response, 'success');
-    } catch (error: any) {
-      this.showMessage(error, 'error');
-    }
   }
 
-  async forgotPassword(formData: {
-    email: string;
-  }): Promise<any> {
-    try {
-      const response = await fetch(`${environment.BACKEND_URL}/User/Forgot-Password`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': environment.API_KEY,
-        },
-        body: JSON.stringify(formData),
+  register(formData: any): void {
+    this.http
+      .post<any>(`${environment.BACKEND_URL}/User/Register`, formData, { headers: this.headers })
+      .pipe(
+        catchError(error => {
+          this.showMessage(error?.error || 'Erro ao registrar.', 'error');
+          return throwError(() => error);
+        })
+      )
+      .subscribe(response => {
+        if (response?.statusCode && response.statusCode >= 400) {
+          this.showMessage(response.message, 'error');
+        } else {
+          this.showMessage(response.message || 'Registrado com sucesso!', 'success');
+        }
       });
-      if (!response.ok) {
-        this.showMessage(response, 'error');
-      }
-      this.showMessage(response, 'success');
-    } catch (error: any) {
-      this.showMessage(error, 'error');
-    }
   }
 
-  async activateAccount(email: string, token: string): Promise<any> {
-    try {
-      const response = await fetch(`${environment.BACKEND_URL}/User/Activate-Account`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': environment.API_KEY,
-        },
-        body: JSON.stringify({ email, token }),
+  forgotPassword(formData: { email: string }): void {
+    this.http
+      .put<any>(`${environment.BACKEND_URL}/User/Forgot-Password`, formData, { headers: this.headers })
+      .pipe(
+        catchError(error => {
+          this.showMessage(error?.error || 'Erro ao solicitar redefinição.', 'error');
+          return throwError(() => error);
+        })
+      )
+      .subscribe(response => {
+        this.showMessage(response.message || 'Solicitação enviada!', 'success');
       });
-      if (!response.ok) {
-        this.showMessage(response, 'error');
-      }
-      this.showMessage(response, 'success');
-    } catch (error: any) {
-      this.showMessage(error, 'error');
-    }
+  }
+
+  activateAccount(email: string, token: string): Observable<any> {
+    const url = `${environment.BACKEND_URL}/User/Activate`;
+    const params = new HttpParams()
+      .set('email', email)
+      .set('token', token);
+    return this.http.put<any>(url, null, { headers: this.headers, params }).pipe(
+      delay(10000) 
+    );
   }
 }

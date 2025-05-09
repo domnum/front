@@ -14,8 +14,8 @@ export class ThemeToggleComponent extends BaseComponent {
   @Input() value: boolean = false;
   @Output() valueChange = new EventEmitter<boolean>();
 
-  constructor(@Inject(ThemeService) themeService: ThemeService) {
-    super(undefined, undefined, 'browser', themeService); 
+  constructor() {
+    super();
   }
 
   onToggleClick() {
