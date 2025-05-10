@@ -15,6 +15,7 @@ import { ThemeToggleComponent } from "../../../../shared/components/theme-toggle
 
       <div class="auth-scroll-wrapper overflow-y-auto flex justify-center p-4 pb-20 mb-12">
         <div class="auth-content w-full max-w-[500px]">
+          <ng-content></ng-content>
           <router-outlet></router-outlet>
         </div>
       </div>
@@ -51,4 +52,4 @@ import { ThemeToggleComponent } from "../../../../shared/components/theme-toggle
     }
   `]
 })
-export class AuthLayoutComponent extends BaseComponent {} 
+export class AuthLayoutComponent extends BaseComponent {}

@@ -1,11 +1,10 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { TokenService } from '../../../client/token.service';
 import { environment } from '../../../../environments/environment';
 import { BaseComponent } from '../../../shared/base/base.component';
 import { Presentation } from '../../../client/src';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, delay } from 'rxjs/operators';
+import { catchError, delay, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -48,57 +47,61 @@ export class AuthService extends BaseComponent {
     this._presentation = null;
   }
 
-  login(form: { email: string; senha: string }): void {
+  login(form: { email: string; password: string }): void {
     this.http
       .post<any>(`${environment.BACKEND_URL}/User/Login`, form, { headers: this.headers })
       .pipe(
         catchError(err => {
-          this.showMessage('Erro ao realizar login.', 'error');
-          return of(null);
+          return throwError(() => err);
         })
       )
-      .subscribe(async response => {
-        if (response?.token) {
-          this.tokenService.setToken(response.token);
-          this.resetPresentation();
-          await this.getPresentation();
-          this.navigateTo('/home');
-        } else {
-          this.showMessage(response?.message || 'Erro ao realizar login.', 'error');
+      .subscribe({
+        next: async (response) => {
+          if (response?.token) {
+            this.tokenService.setToken(response.token);
+            this.resetPresentation();
+            await this.getPresentation();
+            this.navigateTo('/home');
+          } else {
+            this.showMessage(response?.message || 'Erro ao realizar login.', 'error');
+          }
+        },
+        error: (err) => {
+          this.showMessage(err?.error || 'Erro ao realizar login.', 'error');
         }
       });
   }
 
-  register(formData: any): void {
-    this.http
+  register(formData: any): Observable<any> {
+    return this.http
       .post<any>(`${environment.BACKEND_URL}/User/Register`, formData, { headers: this.headers })
       .pipe(
         catchError(error => {
           this.showMessage(error?.error || 'Erro ao registrar.', 'error');
           return throwError(() => error);
+        }),
+        tap((response: any) => {
+          if (response && response.message) {
+            this.showMessage(response.message, 'success');
+          }
         })
-      )
-      .subscribe(response => {
-        if (response?.statusCode && response.statusCode >= 400) {
-          this.showMessage(response.message, 'error');
-        } else {
-          this.showMessage(response.message || 'Registrado com sucesso!', 'success');
-        }
-      });
+      );
   }
 
-  forgotPassword(formData: { email: string }): void {
-    this.http
-      .put<any>(`${environment.BACKEND_URL}/User/Forgot-Password`, formData, { headers: this.headers })
+  forgotPassword(formData: { email: string }): Observable<any> {
+    const params = new HttpParams().set('email', formData.email);
+    return this.http
+      .put<any>(`${environment.BACKEND_URL}/User/Forgot-Password`, null, 
+        { headers: this.headers, params })
       .pipe(
         catchError(error => {
           this.showMessage(error?.error || 'Erro ao solicitar redefinição.', 'error');
           return throwError(() => error);
+        }),
+        tap((response: any) => {
+            this.showMessage(response, 'success');
         })
-      )
-      .subscribe(response => {
-        this.showMessage(response.message || 'Solicitação enviada!', 'success');
-      });
+      );
   }
 
   activateAccount(email: string, token: string): Observable<any> {
@@ -109,5 +112,21 @@ export class AuthService extends BaseComponent {
     return this.http.put<any>(url, null, { headers: this.headers, params }).pipe(
       delay(10000) 
     );
+  }
+
+  forgotPasswordActivate(formData: { token: string; newPassword: string }): void {
+    this.http
+      .put<any>(`${environment.BACKEND_URL}/User/Forgot-Password/Activate`, formData, 
+        { headers: this.headers })
+      .pipe(
+        catchError(error => {
+          this.showMessage(error?.error || 'Erro ao redefinir a senha.', 'error');
+          return throwError(() => error);
+        })
+      )
+      .subscribe(response => {
+        this.showMessage(response || 'Senha redefinida com sucesso!', 'success');
+        this.navigateTo('auth/login');
+      });
   }
 }

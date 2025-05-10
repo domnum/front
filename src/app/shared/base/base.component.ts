@@ -2,6 +2,7 @@ import { Directive, inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
 import { MessageService } from 'primeng/api'; 
+import { mapNotificationsToMessage } from './base.utils';
 
 @Directive()
 export abstract class BaseComponent {
@@ -11,7 +12,6 @@ export abstract class BaseComponent {
   protected themeService = inject(ThemeService);
 
   constructor() {
-    // Aplica o tema salvo no load
     this.themeService?.applyInitialTheme();
   }
 
@@ -37,7 +37,7 @@ export abstract class BaseComponent {
     let message = '';
 
     if (response?.notifications && Array.isArray(response.notifications)) {
-      message = response.notifications.map((n: { key: string; message: string }) => n.message).join('\n');
+      message = mapNotificationsToMessage(response.notifications);
     } else if (typeof response === 'string') {
       message = response;
     } else {

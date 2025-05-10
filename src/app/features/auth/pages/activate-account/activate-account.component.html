@@ -1,21 +1,20 @@
 <div class="flex flex-col items-center justify-center min-h-[300px] text-center px-4">
-    <ng-container *ngIf="loading">
+    <ng-container *ngIf="state.loading">
       <p-progressBar mode="indeterminate" styleClass="w-64 mb-4"></p-progressBar>
       <span class="text-lg font-medium">Ativando sua conta...</span>
     </ng-container>
   
-    <ng-container *ngIf="!loading && success">
+    <ng-container *ngIf="!state.loading && state.success">
       <i class="pi pi-check-circle text-green-500 text-[6rem] mb-4"></i>
       <h2 class="text-3xl font-bold mb-2">Conta ativada com sucesso!</h2>
       <p class="text-base">Você já pode fazer login normalmente.</p>
       <button pButton type="button" label="Ir para Login" class="mt-6" (click)="navigateToLogin()"></button>
     </ng-container>
   
-    <ng-container *ngIf="!loading && success === false">
+    <ng-container *ngIf="!state.loading && state.success === false">
       <i class="pi pi-times-circle text-red-500 text-[6rem] mb-4"></i>
       <h2 class="text-3xl font-bold mb-2">Falha na ativação</h2>
-      <p class="text-base">{{ errorMessage }}</p>
+      <p class="text-base">{{ state.errorMessage }}</p>
       <button pButton type="button" label="Voltar para Login" class="mt-6" (click)="navigateToLogin()"></button>
     </ng-container>
   </div>
-  

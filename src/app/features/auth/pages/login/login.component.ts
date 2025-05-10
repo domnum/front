@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common'; 
 import { RouterModule } from '@angular/router';
-import { FormBuilderComponent, FormField } from '../../../../shared/components/form-builder/form-builder.component';
+import { FormBuilderComponent } from '../../../../shared/components/form-builder/form-builder.component';
 import { LogoComponent } from '../../../../shared/components/logo/logo.component';
 import { BaseComponent } from '../../../../shared/base/base.component';
 import { TokenService } from '../../../../client/token.service';
 import { AuthService } from '../../services/auth.service';
+import { loginFields } from './login.fields';
+import { createLoginForm } from './login.form-factory';
+import { LoginForm, LoginPayload } from './login.model';
 
 @Component({
     selector: 'app-login',
@@ -23,41 +26,9 @@ import { AuthService } from '../../services/auth.service';
         LogoComponent, FormsModule, PasswordModule, RouterModule, FormBuilderComponent]
 })
 export class LoginComponent extends BaseComponent implements OnInit {
-    loginForm: FormGroup;
+    loginForm: FormGroup<LoginForm>;
     loading: boolean = false;
-
-    loginFields: FormField[] = [
-        {
-            name: 'email',
-            label: 'Email',
-            type: 'email',
-            required: true,
-            validators: [Validators.required, Validators.email],
-            errorMessages: {
-                required: 'Email é obrigatório',
-                email: 'Email inválido'
-            },
-            inputConfig: {
-                placeholder: 'Digite seu email'
-            }
-        },
-        {
-            name: 'password',
-            label: 'Senha',
-            type: 'password',
-            required: true,
-            validators: [Validators.required, Validators.minLength(6)],
-            errorMessages: {
-                required: 'Senha é obrigatória',
-                minlength: 'Senha deve ter no mínimo 6 caracteres'
-            },
-            inputConfig: {
-                showToggleMask: true,
-                feedback: false,
-                placeholder: 'Digite sua senha'
-            }
-        }
-    ];
+    loginFields: typeof loginFields = loginFields;
 
     constructor(
         private fb: FormBuilder,
@@ -65,10 +36,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
         private tokenService: TokenService
     ) {
         super();
-        this.loginForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]]
-        });
+        this.loginForm = createLoginForm(this.fb);
     }
 
     ngOnInit(): void {
@@ -80,8 +48,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
     }
     async onLogin(): Promise<void> {
         if (this.loginForm.valid) {
-          await this.authService.login(this.loginForm.value);
+            const payload = {
+                email: this.loginForm.get('email')!.value as string,
+                password: this.loginForm.get('password')!.value as string
+            };
+            this.loading = true;
+            await this.authService.login(payload);
+            this.loading = false;
         }
-        this.loading = false;
-      }
+    }
 }

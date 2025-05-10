@@ -1,0 +1,58 @@
+<h2 *ngIf="title" [ngStyle]="{ color: 'var(--p-primary-400)' }" class="text-xl font-semibold text-center mb-4">
+  {{ title }}
+</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container mb-6">
+  <ng-container *ngFor="let field of fields">
+    <div class="field-container">
+      <ng-container [ngSwitch]="field.type">
+        <!-- Input de senha com toggle -->
+        <div *ngSwitchCase="'password'" class="password-wrapper">
+          <label [for]="field.name" class="field-label">{{ field.label }}</label>
+          <p-password 
+            [id]="field.name"
+            [formControlName]="field.name"
+            [toggleMask]="field.inputConfig?.showToggleMask ?? true"
+            [feedback]="field.inputConfig?.feedback ?? false"
+            [placeholder]="field.inputConfig?.placeholder ?? ''"
+            [inputStyle]="{ width: '100%' }"
+            styleClass="w-full">
+          </p-password>
+          <small class="error-message" *ngIf="form.get(field.name)?.invalid && form.get(field.name)?.touched">
+            {{ getErrorMessage(field) }}
+          </small>
+        </div>
+        <!-- Input customizado -->
+        <app-input
+          *ngSwitchDefault
+          [control]="getFormControl(field.name)"
+          [label]="field.label"
+          [type]="field.type || 'text'"
+          [mask]="field.mask"
+          [placeholder]="field.inputConfig?.placeholder ?? ''"
+          [errorMessages]="field.errorMessages">
+        </app-input>
+      </ng-container>
+    </div>
+  </ng-container>
+  <div class="button-container">
+    <p-button 
+      type="submit"
+      [disabled]="form.invalid || isLoading"
+      class="loading-button"
+      [label]="isLoading ? '' : submitButtonLabel"
+      [loading]="isLoading"
+      [severity]="'info'"
+      [raised]="true"
+      [style]="{ width: '100%' }"
+    >
+      <ng-template pTemplate="icon" *ngIf="isLoading">
+        <i class="pi pi-spin pi-spinner"></i>
+      </ng-template>
+    </p-button>
+    <div class="extra-links" *ngIf="routersLinks.length">
+      <a *ngFor="let link of routersLinks" [routerLink]="link.routerLink">
+        {{ link.label }}
+      </a>
+    </div>
+  </div>
+</form>

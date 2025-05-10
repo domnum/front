@@ -27,6 +27,10 @@ export const AUTH_ROUTES: Routes = [
         path: 'activate-account',
         loadComponent: () => import('./activate-account/activate-account.component').then(m => m.ActivateAccountComponent)
       },
+      {
+        path: 'forgot-password-activate',
+        loadComponent: () => import('./forgot-password-activate/forgot-password-activate.component').then(m => m.ForgotPasswordActivateComponent)
+      },
     ]
   }
 ]; 

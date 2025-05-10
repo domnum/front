@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { LogoComponent } from "../../../../shared/components/logo/logo.component";
 import { FormBuilderComponent } from "../../../../shared/components/form-builder/form-builder.component";
 import { BaseComponent } from '../../../../shared/base/base.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { passwordMatchValidator } from '../../../../shared/base/validators/password.validator';
+import { forgotPasswordFields } from './forgot-password.fields';
+import { createForgotPasswordForm } from './forgot-password.form-factory';
+import { ForgotPasswordForm, ForgotPasswordPayload } from './forgot-password.model';
 
 @Component({
   selector: 'app-forgot-password',
@@ -25,20 +27,8 @@ import { passwordMatchValidator } from '../../../../shared/base/validators/passw
 
 export class ForgotPasswordComponent extends BaseComponent {
 
-  form: FormGroup;
-  fields = [
-    {
-      name: 'email',
-      label: 'Email',
-      type: 'email',
-      required: true,
-      validators: [Validators.required, Validators.email],
-      errorMessages: {
-        required: 'O Email é obrigatório.',
-        email: 'O Email informado é inválido.'
-      } as Record<string, string>
-    },
-  ];
+  form: FormGroup<ForgotPasswordForm>;
+  fields = forgotPasswordFields;
 
   routersLinks = [
     { label: 'Cadastre-se', routerLink: '/auth/register' },
@@ -51,15 +41,21 @@ export class ForgotPasswordComponent extends BaseComponent {
   ) {
 
     super();
-    this.form = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-      },
-    );
+    this.form = createForgotPasswordForm(this.fb);
   }
 
-  async onForgotPassword(formData: any) {
+  async onForgotPassword(formData: ForgotPasswordForm | any) {
     if (this.form.invalid) return;
-    await this.authService.forgotPassword(formData.email);
+    const payload: ForgotPasswordPayload = {
+      email: formData.email || formData.email?.value || ''
+    };
+    this.authService.forgotPassword(payload).subscribe({
+      next: () => {
+        this.form.reset();
+        this.navigateTo('/auth/login');
+      },
+      error: () => {
+        this.form.reset();}
+    });
   }
 }
