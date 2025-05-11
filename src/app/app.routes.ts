@@ -19,6 +19,14 @@ export const routes: Routes = [
     loadChildren: () => import('./features/landing/pages/landing.routes').then(m => m.LANDING_ROUTES)
   },
   {
+    path: 'animate',
+    loadChildren: () => import('./features/animate/pages/animate.routes').then(m => m.ANIMATE_ROUTES)
+  },
+    {
+    path: 'aboutus',
+    loadChildren: () => import('./features/about/pages/about.routes').then(m => m.ABOUT_ROUTES)
+  },
+  {
     path: 'not-found',
     loadComponent: () => import('./shared/components/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
